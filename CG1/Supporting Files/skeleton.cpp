@@ -24,16 +24,31 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 SDL_Surface* screen;
 
+vector<float> result( 10 );
+
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
 
 void Draw();
+std::vector<float> Interpolate( float a, float b, vector<float>& result ) {
+    for (int i=0; i<result.size(); ++i) {
+        result[i] = a+i;
+    }
+    return result;
+}
 
 // --------------------------------------------------------
 // FUNCTION DEFINITIONS
 
 int main( int argc, char* argv[] )
 {
+    
+    vector<float> result( 10 ); // Create a vector width 10 floats
+    Interpolate( 5, 14, result ); // Fill it with interpolated values
+    
+    for( int i=0; i<result.size(); ++i )
+        cout << result[i] << " "; // Print the result to the terminal
+    
 	screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
 	while( NoQuitMessageSDL() )
 	{
@@ -45,19 +60,18 @@ int main( int argc, char* argv[] )
 
 void Draw()
 {
-
-	for( int y=0; y<SCREEN_HEIGHT; ++y )
-	{
-
-		for( int x=0; x<SCREEN_WIDTH; ++x )
-		{
-			vec3 color(0,0,1);
-			PutPixelSDL( screen, x, y, color );
-		}
-	}
-
-	if( SDL_MUSTLOCK(screen) )
-		SDL_UnlockSurface(screen);
-
-	SDL_UpdateRect( screen, 0, 0, 0, 0 );
+    if( SDL_MUSTLOCK(screen) )
+        SDL_LockSurface(screen);
+    for( int y=0; y<SCREEN_HEIGHT; ++y )
+    {
+        for( int x=0; x<SCREEN_WIDTH; ++x )
+        {
+            vec3 color(0,0,1);
+            PutPixelSDL( screen, x, y, color );
+        }
+        
+    }
+    if( SDL_MUSTLOCK(screen) )
+        SDL_UnlockSurface(screen);
+    SDL_UpdateRect( screen, 0, 0, 0, 0 );
 }
