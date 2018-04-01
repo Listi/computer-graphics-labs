@@ -88,9 +88,10 @@ void Draw()
         SDL_LockSurface(screen);
     for( int y=0; y<SCREEN_HEIGHT; ++y )
     {
+        vector<vec3> right = Interpolate( downLeft[y], downRight[y], horizontal );
         for( int x=0; x<SCREEN_WIDTH; ++x )
         {
-            vector<vec3> right = Interpolate( downLeft[y], downRight[y], horizontal );
+            
             PutPixelSDL( screen, x, y, right[x] );
         }
         
