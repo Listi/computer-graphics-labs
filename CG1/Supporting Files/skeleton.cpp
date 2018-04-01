@@ -24,13 +24,22 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 SDL_Surface* screen;
 
-vector<float> result( 10 );
+//vector<float> result( 10 );
+
+//Task 2.3
+
+vec3 red(1,0,0); // topLeft
+vec3 blue(0,0,1); // topRight
+vec3 green(0,1,0); // bottomLeft
+vec3 yellow(1,1,0); // bottomRight
+vector<vec3> leftSide( SCREEN_HEIGHT );
+vector<vec3> rightSide( SCREEN_HEIGHT );
+vector<vec3> horizontal ( SCREEN_WIDTH );
 
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
 
 void Draw();
-
 
 // Task 2.2 a)
 //
@@ -43,6 +52,26 @@ void Draw();
 
 
 //Task 2.2 b)
+//std::vector<vec3> Interpolate( vec3 a, vec3 b, vector<vec3>& result ) {
+//
+//    float xValue = (b.x - a.x)/(result.size()-1);
+//    float yValue = (b.y - a.y)/(result.size()-1);
+//    float zValue = (b.z - a.z)/(result.size()-1);
+//
+//    result[0].x = a.x;
+//    result[0].y = a.y;
+//    result[0].z = a.z;
+//
+//    for(int i=1; i<result.size(); ++i){
+//        result[i].x = result[i-1].x+xValue;
+//        result[i].y = result[i-1].y+yValue;
+//        result[i].z = result[i-1].z+zValue;
+//    }
+//    return result;
+//}
+
+//Task 2.3
+
 std::vector<vec3> Interpolate( vec3 a, vec3 b, vector<vec3>& result ) {
     
     float xValue = (b.x - a.x)/(result.size()-1);
@@ -62,54 +91,60 @@ std::vector<vec3> Interpolate( vec3 a, vec3 b, vector<vec3>& result ) {
 }
 
 
+
 // --------------------------------------------------------
 // FUNCTION DEFINITIONS
 
 int main( int argc, char* argv[] )
 {
-
-// Task 2.2 a)
-//
-//    vector<float> result( 10 ); // Create a vector width 10 floats
-//    Interpolate( 5, 14, result ); // Fill it with interpolated values
-//
-//    for( int i=0; i<result.size(); ++i )
-//        cout << result[i] << " "; // Print the result to the terminal
+    
+    // Task 2.2 a)
+    //
+    //    vector<float> result( 10 ); // Create a vector width 10 floats
+    //    Interpolate( 5, 14, result ); // Fill it with interpolated values
+    //
+    //    for( int i=0; i<result.size(); ++i )
+    //        cout << result[i] << " "; // Print the result to the terminal
     
     
-//Task 2.2 b)
+    //Task 2.2 b)
     
-    vector<vec3> result( 4 );
-    vec3 a(1,4,9.2);
-    vec3 b(4,1,9.8);
-    Interpolate( a, b, result );
-    for( int i=0; i<result.size(); ++i )
+    //    vector<vec3> result( 4 );
+    //    vec3 a(1,4,9.2);
+    //    vec3 b(4,1,9.8);
+    //    Interpolate( a, b, result );
+    //    for( int i=0; i<result.size(); ++i )
+    //    {
+    //        cout << "( "
+    //        << result[i].x << ", "
+    //        << result[i].y << ", "
+    //        << result[i].z << " ) ";
+    //    }
+    
+    screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
+    while( NoQuitMessageSDL() )
     {
-        cout << "( "
-        << result[i].x << ", "
-        << result[i].y << ", "
-        << result[i].z << " ) ";
+        Draw();
     }
-    
-	screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
-	while( NoQuitMessageSDL() )
-	{
-		Draw();
-	}
-	SDL_SaveBMP( screen, "screenshot.bmp" );
-	return 0;
+    SDL_SaveBMP( screen, "screenshot.bmp" );
+    return 0;
 }
 
 void Draw()
 {
+    vector<vec3> downLeft = Interpolate( red, yellow, leftSide );
+    vector<vec3> downRight = Interpolate( blue, green, rightSide );
+    
+    
     if( SDL_MUSTLOCK(screen) )
         SDL_LockSurface(screen);
     for( int y=0; y<SCREEN_HEIGHT; ++y )
     {
+        vector<vec3> right = Interpolate( downLeft[y], downRight[y], horizontal );
         for( int x=0; x<SCREEN_WIDTH; ++x )
         {
-            vec3 color(0,0,1);
-            PutPixelSDL( screen, x, y, color );
+            
+            PutPixelSDL( screen, x, y, right[x] );
         }
         
     }
@@ -117,3 +152,5 @@ void Draw()
         SDL_UnlockSurface(screen);
     SDL_UpdateRect( screen, 0, 0, 0, 0 );
 }
+
+
