@@ -46,12 +46,12 @@ SDL_Surface* screen;
 //Task 3
 
 vector<vec3> stars( 1000 );
-
-
+int t;
 
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
 
+void Update();
 void Draw();
 
 // Task 2.2 a)
@@ -151,8 +151,11 @@ int main( int argc, char* argv[] )
     //    }
     
     screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
+    t = SDL_GetTicks();
+    
     while( NoQuitMessageSDL() )
     {
+        Update();
         Draw();
     }
     SDL_SaveBMP( screen, "screenshot.bmp" );
@@ -193,8 +196,25 @@ int main( int argc, char* argv[] )
 //    SDL_UpdateRect( screen, 0, 0, 0, 0 );
 //}
 
+void Update()
+{
+    int t2 = SDL_GetTicks();
+    float dt = float(t2-t);
+    t = t2;
+    
+    for( int s=0; s<stars.size(); ++s ) {
+        
+    stars[s].z = stars[s].z - 0.0002*dt;
+        
+    if( stars[s].z <= 0 )
+        stars[s].z += 1;
+    }
+    
+}
+
 void Draw()
 {
+    
     SDL_FillRect( screen, 0, 0 );
     if( SDL_MUSTLOCK(screen) )
         SDL_LockSurface(screen);
@@ -202,9 +222,9 @@ void Draw()
     float halfWidth = SCREEN_WIDTH / 2;
     for( size_t s=0; s<stars.size(); ++s )
     {
-        // Add code for projecting and drawing each star
         int u = halfHeight * (stars[s].x / stars[s].z) + halfWidth;
         int v = halfHeight * (stars[s].y / stars[s].z) + halfHeight;
+        
         vec3 color(1,1,1);
         PutPixelSDL(screen, u, v, color);
     }
