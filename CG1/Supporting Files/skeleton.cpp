@@ -225,7 +225,7 @@ void Draw()
         int u = halfHeight * (stars[s].x / stars[s].z) + halfWidth;
         int v = halfHeight * (stars[s].y / stars[s].z) + halfHeight;
         
-        vec3 color(1,1,1);
+        vec3 color = 0.2f * vec3(1,1,1) / (stars[s].z*stars[s].z);
         PutPixelSDL(screen, u, v, color);
     }
     if( SDL_MUSTLOCK(screen) )
