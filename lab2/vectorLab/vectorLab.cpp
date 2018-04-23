@@ -4,6 +4,7 @@
 #pragma comment(lib, "glu32.lib")
 #pragma comment(linker, "/subsystem:console")
 
+
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
@@ -22,6 +23,7 @@ void idle(void);    //what to do when nothing is happening
 void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
+
 
 void DrawVector(Position& startPos, Vector& v1)
 {
@@ -51,6 +53,46 @@ void DrawVector(Position& startPos, Vector& v1)
 	glEnd();
 	glPopMatrix();
 }
+
+void Answer1(void)
+{
+	Position position;
+	position.x = 1.0; position.y = 2.0; position.z = 0.0;
+	Vector vector(4.0, 2.0, 0.0);
+	DrawVector(position, vector);
+}
+
+void Answer2(void)
+{
+	Position position;
+	position.x = 0.0; position.y = 0.0; position.z = 0.0;
+	Vector vector1(4.0, 2.0, 0.0);
+	Vector vector2(-2.0, 3.0, 0.0);
+	Vector vector3 = vector1.addTo(vector2);
+	DrawVector(position, vector3);
+}
+
+void Answer3(void)
+{
+	Position position;
+	position.x = 0.0; position.y = 0.0; position.z = 0.0;
+
+	Vector vector1(0.0, 1.0, 0.0);
+	Vector vector2(0.707, 0.707, 0.0);
+	DrawVector(position, vector1);
+	DrawVector(position, vector2);
+	float dotProduct = vector1.getDotProduct(vector2);
+
+	vector1.normalise();
+	vector2.normalise();
+	float normDotProduct = vector1.getDotProduct(vector2);
+
+	float cosangle = dotProduct/normDotProduct;
+
+	float angle = RAD2DEG(acos(cosangle));
+	//should return the correct angle (0.707rad)
+}
+
 
 //our main routine
 int main(int argc, char *argv[])
@@ -125,11 +167,13 @@ origin.x = origin.y = origin.z = 0.0;
   //draw the vector at position
   glDisable(GL_LINE_STIPPLE);
   glLineWidth(10.0);
-  glColor3f(1.0,1.0,0.0);
+	glColor3f(1.0,1.0,0.0);
+	Answer3();
+	glColor3f(0.0,1.0,0.0);
   DrawVector(p1,v1);
 
   //draw a red horizontal line, one unit long
-  glLineWidth(3.0);
+  glLineWidth(1.0);
   glColor3f(3.0,0.0,0.0);
   glPushMatrix();
 	  glTranslatef(0.0, 0.0, 0.0);
@@ -140,7 +184,7 @@ origin.x = origin.y = origin.z = 0.0;
   glPopMatrix();
 
   //draw a green vertical line, one unit high
-  glLineWidth(3.0);
+  glLineWidth(1.0);
   glColor3f(0.0,0.0,1.0);
   glPushMatrix();
 	  glBegin(GL_LINES);

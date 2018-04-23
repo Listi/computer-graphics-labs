@@ -52,14 +52,13 @@ void Vector::setMagnitude(const float m)
 {
 	//set the length of the vector
 	Vector result;
-	float mag = getMagnitude(this);
+	float mag = sqrt(pow(this->x, 2)+pow(this->y, 2)+pow(this->z, 2));
 	float newx = this->x * m / mag;
 	float newy = this->y * m / mag;
 	float newz = this->z * m / mag;
 	result.x = newx;
 	result.y = newy;
 	result.z = newz;
-	return result;
 }
 
 float Vector::getDotProduct(const Vector &other) const
@@ -87,9 +86,8 @@ void Vector::normalise(void)
 	//normalise this vector (set its length to 1)
 	float mag;
 	Vector result;
-	mag = getMagnitude(this);
+	mag = sqrt(pow(this->x, 2)+pow(this->y, 2)+pow(this->z, 2));
 	result.x = this->x / mag;
 	result.y = this->y / mag;
 	result.z = this->z / mag;
-	return result;
 }
