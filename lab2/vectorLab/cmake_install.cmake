@@ -1,4 +1,4 @@
-# Install script for directory: /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab
+# Install script for directory: /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

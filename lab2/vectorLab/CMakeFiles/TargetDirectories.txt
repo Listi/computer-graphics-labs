@@ -1,3 +1,3 @@
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/rebuild_cache.dir
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/edit_cache.dir
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/vectorLab.dir
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/rebuild_cache.dir
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/edit_cache.dir
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/vectorLab.dir

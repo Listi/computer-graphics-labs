@@ -43,10 +43,10 @@ RM = /usr/local/Cellar/cmake/3.11.0/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab
+CMAKE_SOURCE_DIR = /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab
+CMAKE_BINARY_DIR = /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab
 
 # Include any dependencies generated for this target.
 include CMakeFiles/vectorLab.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/vectorLab.dir/flags.make
 
 CMakeFiles/vectorLab.dir/vectorLab.cpp.o: CMakeFiles/vectorLab.dir/flags.make
 CMakeFiles/vectorLab.dir/vectorLab.cpp.o: vectorLab.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vectorLab.dir/vectorLab.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vectorLab.dir/vectorLab.cpp.o -c /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/vectorLab.dir/vectorLab.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vectorLab.dir/vectorLab.cpp.o -c /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp
 
 CMakeFiles/vectorLab.dir/vectorLab.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vectorLab.dir/vectorLab.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp > CMakeFiles/vectorLab.dir/vectorLab.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp > CMakeFiles/vectorLab.dir/vectorLab.cpp.i
 
 CMakeFiles/vectorLab.dir/vectorLab.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vectorLab.dir/vectorLab.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp -o CMakeFiles/vectorLab.dir/vectorLab.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp -o CMakeFiles/vectorLab.dir/vectorLab.cpp.s
 
 CMakeFiles/vectorLab.dir/vector.cpp.o: CMakeFiles/vectorLab.dir/flags.make
 CMakeFiles/vectorLab.dir/vector.cpp.o: vector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vectorLab.dir/vector.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vectorLab.dir/vector.cpp.o -c /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/vectorLab.dir/vector.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/vectorLab.dir/vector.cpp.o -c /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.cpp
 
 CMakeFiles/vectorLab.dir/vector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/vectorLab.dir/vector.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.cpp > CMakeFiles/vectorLab.dir/vector.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.cpp > CMakeFiles/vectorLab.dir/vector.cpp.i
 
 CMakeFiles/vectorLab.dir/vector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/vectorLab.dir/vector.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.cpp -o CMakeFiles/vectorLab.dir/vector.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.cpp -o CMakeFiles/vectorLab.dir/vector.cpp.s
 
 # Object files for target vectorLab
 vectorLab_OBJECTS = \
@@ -95,7 +95,7 @@ vectorLab: CMakeFiles/vectorLab.dir/vectorLab.cpp.o
 vectorLab: CMakeFiles/vectorLab.dir/vector.cpp.o
 vectorLab: CMakeFiles/vectorLab.dir/build.make
 vectorLab: CMakeFiles/vectorLab.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable vectorLab"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable vectorLab"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/vectorLab.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/vectorLab.dir/clean:
 .PHONY : CMakeFiles/vectorLab.dir/clean
 
 CMakeFiles/vectorLab.dir/depend:
-	cd /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/vectorLab.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/vectorLab.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/vectorLab.dir/depend
 

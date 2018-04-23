@@ -5,6 +5,7 @@
 #pragma comment(linker, "/subsystem:console")
 
 
+#include <iostream>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
@@ -79,8 +80,10 @@ void Answer3(void)
 
 	Vector vector1(0.0, 1.0, 0.0);
 	Vector vector2(0.707, 0.707, 0.0);
+
 	DrawVector(position, vector1);
 	DrawVector(position, vector2);
+
 	float dotProduct = vector1.getDotProduct(vector2);
 
 	vector1.normalise();
@@ -90,7 +93,34 @@ void Answer3(void)
 	float cosangle = dotProduct/normDotProduct;
 
 	float angle = RAD2DEG(acos(cosangle));
-	//should return the correct angle (0.707rad)
+
+	std::cout << angle;
+	//should return the correct angle (0.707rad) but can't get cout to work atm
+}
+
+void Answer4(void)
+{
+	Position position;
+	position.x = 0.0; position.y = 0.0; position.z = 0.0;
+
+	Vector vector1(4.0, 4.0, 0.0);
+	Vector vector2(-2.0, 3.0, 0.0);
+
+	DrawVector(position, vector1);
+	DrawVector(position, vector2);
+
+	float dotProduct = vector1.getDotProduct(vector2);
+
+	vector1.normalise();
+	vector2.normalise();
+	float normDotProduct = vector1.getDotProduct(vector2);
+
+	if (dotProduct == normDotProduct || -normDotProduct) {
+		std::cout << "Ja";
+	}
+	else{
+		std::cout << "Nehedu!";
+	}
 }
 
 
@@ -168,9 +198,9 @@ origin.x = origin.y = origin.z = 0.0;
   glDisable(GL_LINE_STIPPLE);
   glLineWidth(10.0);
 	glColor3f(1.0,1.0,0.0);
-	Answer3();
+	Answer4();
 	glColor3f(0.0,1.0,0.0);
-  DrawVector(p1,v1);
+  // DrawVector(p1,v1);
 
   //draw a red horizontal line, one unit long
   glLineWidth(1.0);

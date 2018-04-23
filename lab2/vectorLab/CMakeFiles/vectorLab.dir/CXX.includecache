@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.cpp
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.cpp
 vector.h
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.h
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.h
 
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.h
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.h
 math.h
 -
 
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp
+iostream
+-
 OpenGL/gl.h
 -
 OpenGL/glu.h
@@ -22,7 +24,7 @@ OpenGL/glu.h
 GLUT/glut.h
 -
 vector.h
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/vector.h
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vector.h
 stdlib.h
-/Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/stdlib.h
+/Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/stdlib.h
 

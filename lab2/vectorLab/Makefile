@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.11.0/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab
+CMAKE_SOURCE_DIR = /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab
+CMAKE_BINARY_DIR = /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Petter/Documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
