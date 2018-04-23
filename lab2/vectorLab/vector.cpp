@@ -44,7 +44,7 @@ float Vector::getMagnitude(void) const
 {
 	//get the length of the vector
 	float result;
-	result = sqrt(pow(this.x, 2)+pow(this.y, 2)+pow(this.z, 2));
+	result = sqrt(pow(this->x, 2)+pow(this->y, 2)+pow(this->z, 2));
 	return result;
 }
 
@@ -53,9 +53,9 @@ void Vector::setMagnitude(const float m)
 	//set the length of the vector
 	Vector result;
 	float mag = getMagnitude(this);
-	float newx = this.x * m / mag;
-	float newy = this.y * m / mag;
-	float newz = this.z * m / mag;
+	float newx = this->x * m / mag;
+	float newy = this->y * m / mag;
+	float newz = this->z * m / mag;
 	result.x = newx;
 	result.y = newy;
 	result.z = newz;
@@ -66,9 +66,9 @@ float Vector::getDotProduct(const Vector &other) const
 {
 	//return the dot product between this vector and other
 	float result;
-	result += this.x * other.x;
-	result += this.y * other.y;
-	result += this.z * other.z;
+	result += this->x * other.x;
+	result += this->y * other.y;
+	result += this->z * other.z;
 	return result;
 }
 
@@ -76,9 +76,9 @@ Vector Vector::getCrossProduct(const Vector &other) const
 {
 	//return the cross product between this vector and other
 	Vector result;
-	result.x = (this.y * other.z) - (this.z * other.y);
-	result.y = (this.z * other.x) - (this.x * other.z);
-	result.z = (this.x * other.y) - (this.y * other.x);
+	result.x = (this->y * other.z) - (this->z * other.y);
+	result.y = (this->z * other.x) - (this->x * other.z);
+	result.z = (this->x * other.y) - (this->y * other.x);
 	return result;
 }
 
@@ -88,8 +88,8 @@ void Vector::normalise(void)
 	float mag;
 	Vector result;
 	mag = getMagnitude(this);
-	result.x = this.x / mag;
-	result.y = this.y / mag;
-	result.z = this.z / mag;
+	result.x = this->x / mag;
+	result.y = this->y / mag;
+	result.z = this->z / mag;
 	return result;
 }
