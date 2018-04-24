@@ -131,6 +131,35 @@ void Answer4(void)
 	}
 }
 
+void Answer5(void)
+{
+	Position position;
+	position.x = 0.0; position.y = 0.0; position.z = 0.0;
+
+	Vector vector1(5.0, 4.0, 0.0);
+	Vector vector2(3.0, 9.0, 0.0);
+
+	DrawVector(position, vector1);
+	DrawVector(position, vector2);
+
+	float mag2 = vector2.getMagnitude();
+	float dotProduct = vector1.getDotProduct(vector2);
+
+	float scalar = (dotProduct/(pow(mag2, 2)));
+
+	Vector proj1on2;
+
+	proj1on2.x = vector2.x*scalar;
+	proj1on2.y = vector2.y*scalar;
+	proj1on2.z = vector2.z*scalar;
+
+	Vector vector3 = vector1.subtractFrom(proj1on2);
+
+	position.x = 5.0; position.y = 4.0; position.z = 0.0;
+
+	DrawVector(position, vector3);
+}
+
 
 //our main routine
 int main(int argc, char *argv[])
@@ -206,7 +235,7 @@ origin.x = origin.y = origin.z = 0.0;
   glDisable(GL_LINE_STIPPLE);
   glLineWidth(10.0);
 	glColor3f(1.0,1.0,0.0);
-	Answer4();
+	Answer5();
 	glColor3f(0.0,1.0,0.0);
   // DrawVector(p1,v1);
 
