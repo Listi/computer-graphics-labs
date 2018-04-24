@@ -97,7 +97,6 @@ void Answer3(void)
 	float angle = RAD2DEG(acos(cosangle));
 
 	std::cout << angle << '\n';
-	//should return the correct angle (0.707rad) but can't get cout to work atm
 }
 
 void Answer4(void)
@@ -160,6 +159,23 @@ void Answer5(void)
 	DrawVector(position, vector3);
 }
 
+void Answer6(void)
+{
+	Vector vector1(4.0, 4.0, 0.0);
+	Vector vector2(-9.0, 0.0, 0.0);
+
+	float dotProduct = vector1.getDotProduct(vector2);
+
+	float magVec1 = vector1.getMagnitude();
+	float magVec2 = vector2.getMagnitude();
+
+	float cosangle = ((int)((100.0*dotProduct)/(magVec1*magVec2))/100.0);
+
+	float angle = RAD2DEG(acos(cosangle));
+
+	std::cout << angle << '\n';
+}
+
 
 //our main routine
 int main(int argc, char *argv[])
@@ -213,7 +229,7 @@ void DisplayScene(void)
   //initialise the modelview matrix to the identity matrix
   glLoadIdentity();
 
-  glTranslatef(-3.0,-3.0,-10.0);
+  glTranslatef(-10.0,-10.0,-25.0);
 
   /*glColor3f(1.0,0.0,0.0);
   glBegin(GL_POINTS);
@@ -233,9 +249,9 @@ origin.x = origin.y = origin.z = 0.0;
 
   //draw the vector at position
   glDisable(GL_LINE_STIPPLE);
-  glLineWidth(10.0);
+  glLineWidth(2.0);
 	glColor3f(1.0,1.0,0.0);
-	Answer5();
+	Answer6();
 	glColor3f(0.0,1.0,0.0);
   // DrawVector(p1,v1);
 
