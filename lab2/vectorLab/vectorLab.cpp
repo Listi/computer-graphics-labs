@@ -6,6 +6,8 @@
 
 
 #include <iostream>
+#include <stdio.h>
+#include <math.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
@@ -94,7 +96,7 @@ void Answer3(void)
 
 	float angle = RAD2DEG(acos(cosangle));
 
-	std::cout << angle;
+	std::cout << angle << '\n';
 	//should return the correct angle (0.707rad) but can't get cout to work atm
 }
 
@@ -111,15 +113,21 @@ void Answer4(void)
 
 	float dotProduct = vector1.getDotProduct(vector2);
 
-	vector1.normalise();
-	vector2.normalise();
-	float normDotProduct = vector1.getDotProduct(vector2);
+	// vector1.normalise();
+	// vector2.normalise();
 
-	if (dotProduct == normDotProduct || -normDotProduct) {
-		std::cout << "Ja";
+	float magVec1 = vector1.getMagnitude();
+	float magVec2 = vector2.getMagnitude();
+
+	float cosangle = ((int)((100.0*dotProduct)/(magVec1*magVec2))/100.0);
+
+	std::cout << cosangle << '\n';
+
+	if (cosangle == 1.0){
+		std::cout << "Same angle" << '\n';
 	}
 	else{
-		std::cout << "Nehedu!";
+		std::cout << "Different angle" << '\n';
 	}
 }
 

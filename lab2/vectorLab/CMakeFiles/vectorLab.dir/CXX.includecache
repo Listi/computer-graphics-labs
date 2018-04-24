@@ -17,6 +17,10 @@ math.h
 /Users/Petter/documents/computer-graphics-labs/lab2/vectorLab/vectorLab.cpp
 iostream
 -
+stdio.h
+-
+math.h
+-
 OpenGL/gl.h
 -
 OpenGL/glu.h

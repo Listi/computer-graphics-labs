@@ -85,9 +85,9 @@ void Vector::normalise(void)
 {
 	//normalise this vector (set its length to 1)
 	float mag;
-	Vector result;
 	mag = sqrt(pow(this->x, 2)+pow(this->y, 2)+pow(this->z, 2));
-	result.x = this->x / mag;
-	result.y = this->y / mag;
-	result.z = this->z / mag;
+	
+	this->x = this->x / mag;
+	this->y = this->y / mag;
+	this->z = this->z / mag;
 }
