@@ -161,8 +161,14 @@ void Answer5(void)
 
 void Answer6(void)
 {
-	Vector vector1(4.0, 4.0, 0.0);
-	Vector vector2(-9.0, 0.0, 0.0);
+	Vector firstPointOne(1.0, 8.0, 0.0);
+	Vector firstPointTwo(5.0, 4.0, 0.0);
+
+	Vector secondPointOne(3.0, 0.0, 0.0);
+	Vector secondPointTwo(-6.0, 0.0, 0.0);
+
+	Vector vector1 = firstPointOne.subtractFrom(firstPointTwo);
+	Vector vector2 = secondPointOne.subtractFrom(secondPointTwo);
 
 	float dotProduct = vector1.getDotProduct(vector2);
 
@@ -174,6 +180,40 @@ void Answer6(void)
 	float angle = RAD2DEG(acos(cosangle));
 
 	std::cout << angle << '\n';
+}
+
+void Answer7(void)
+{
+	Position position;
+
+	position.x = 0.0; position.y = 0.0; position.z = 0.0;
+
+	Vector firstPointOne(-2.5, -2.0, 0.0);
+	Vector firstPointTwo(5.0, -2.0, 0.0);
+
+	Vector vector1 = firstPointOne.subtractFrom(firstPointTwo);
+
+	Vector secondPointOne(-2.5, -2.0, 0.0);
+	Vector secondPointTwo(8.0, 3.0, 0.0);
+
+	Vector vector2 = secondPointOne.subtractFrom(secondPointTwo);
+
+
+	vector1.normalise();
+	std::cout << "Coordinates of the point:" << '\n';
+
+	float length = vector2.getDotProduct(vector1);
+	Vector result;
+	result.x = (length+firstPointOne.x)*vector1.x;
+	result.y = (length+firstPointOne.y)*vector1.y;
+	result.z = (length+firstPointOne.z)*vector1.z;
+
+	std::cout << result.x << '\n';
+	std::cout << result.y << '\n';
+	std::cout << result.z << '\n';
+
+	// DrawVector(position, refVector);
+
 }
 
 
@@ -251,7 +291,7 @@ origin.x = origin.y = origin.z = 0.0;
   glDisable(GL_LINE_STIPPLE);
   glLineWidth(2.0);
 	glColor3f(1.0,1.0,0.0);
-	Answer6();
+	Answer7();
 	glColor3f(0.0,1.0,0.0);
   // DrawVector(p1,v1);
 
