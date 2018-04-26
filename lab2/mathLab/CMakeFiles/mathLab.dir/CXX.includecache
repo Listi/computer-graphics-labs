@@ -21,6 +21,12 @@ GL/glu.h
 -
 GL/glut.h
 -
+string
+-
+iostream
+-
+stdio.h
+-
 myVector.h
 /Users/Petter/documents/computer-graphics-labs/lab2/mathLab/myVector.h
 myMatrix.h
