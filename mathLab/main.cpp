@@ -17,11 +17,13 @@
 #include <GL/glut.h>
 #endif
 
+#include <string>
 #include <iostream>
 #include <stdio.h>
 
 #include "myVector.h"
 #include "myMatrix.h"
+
 // #include "vector.h"
 using namespace MyMathLab;
 
@@ -33,6 +35,7 @@ void idle(void);    //what to do when nothing is happening
 void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
+float angle = -10.0;
 
 void draw_square (void)
 {
@@ -41,7 +44,7 @@ void draw_square (void)
 
   glBegin(GL_POLYGON);
     glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(-1.0, 0.0, 0.0);
+    glVertex3f(-1.0, 1.0, 0.0);
 
     glColor3f(0.0, 0.0, 0.0);
     glVertex3f(-1.0, -1.0, 0.0);
@@ -52,6 +55,8 @@ void draw_square (void)
     glColor3f(1.0, 1.0, 1.0);
     glVertex3f(1.0, 1.0, 0.0);
   glEnd();
+
+  std::cout << "Square created " + '\n';
 }
 
 //our main routine
@@ -92,6 +97,7 @@ int main(int argc, char *argv[])
 //window needs to be redrawn
 void draw(void)
 {
+  angle += 5.0;
   //clear the current window
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //make changes to the modelview matrix
@@ -149,7 +155,7 @@ void draw(void)
 
   glEnd();
 
-  // 2.2.1
+  // 2.1.1
 
   // glLoadIdentity();
   //
@@ -169,21 +175,40 @@ void draw(void)
   //   glVertex3f(0.0f, 1.0f, 0.0f);
   // glEnd();
 
+  // 2.2.1
+
+  // glLoadIdentity();
+  //
+  // glPushMatrix();
+  //   glTranslatef(1.0f, 1.0f, -5.0f);
+  //   draw_square();
+  // glPopMatrix();
+  //
+  // glPushMatrix();
+  //   glTranslatef(-1.0f, 1.0f, -5.0f);
+  //   draw_square();
+  // glPopMatrix();
+
+
+  // 2.2.2
+
   glLoadIdentity();
 
   glPushMatrix();
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
     glTranslatef(1.0f, 1.0f, -5.0f);
     draw_square();
   glPopMatrix();
 
   glPushMatrix();
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
     glTranslatef(-1.0f, 1.0f, -5.0f);
     draw_square();
   glPopMatrix();
 
-
-
   //flush what we've drawn to the buffer
+
+
   glFlush();
   //swap the back buffer with the front buffer
   glutSwapBuffers();
@@ -202,7 +227,6 @@ void idle(void)
 //key
 void key(unsigned char k, int x, int y)
 {
-  float angle = 0.0;
   switch(k)
   {
     case 27: //27 is the ASCII code for the ESCAPE key
@@ -210,15 +234,9 @@ void key(unsigned char k, int x, int y)
       break;
 
     case 114:
-      angle += 5.0;
-      glPushMatrix();
-        glTranslatef(1.0f, 1.0f, -5.0f);
-        glRotatef(angle, 0.0f, 0.0f, 1.0f);
-        draw_square();
-      glPopMatrix();
       draw();
-      std::cout << "inne i case114" + '\n';
       break;
+
   }
 }
 
