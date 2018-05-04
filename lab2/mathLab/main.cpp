@@ -44,7 +44,7 @@ void draw_square (void)
 
   glBegin(GL_POLYGON);
     glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(-1.0, 0.0, 0.0);
+    glVertex3f(-1.0, 1.0, 0.0);
 
     glColor3f(0.0, 0.0, 0.0);
     glVertex3f(-1.0, -1.0, 0.0);
@@ -55,8 +55,6 @@ void draw_square (void)
     glColor3f(1.0, 1.0, 1.0);
     glVertex3f(1.0, 1.0, 0.0);
   glEnd();
-
-  std::cout << "Square created " + '\n';
 }
 
 //our main routine
@@ -189,22 +187,55 @@ void draw(void)
   //   draw_square();
   // glPopMatrix();
 
+  // 2.2.2 - The squares rotate around their center
 
-  // 2.2.2
+  // glLoadIdentity();
+  //
+  // glPushMatrix();
+  // glTranslatef(1.0f, 1.0f, -5.0f);
+  // glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  // draw_square();
+  // glPopMatrix();
+  //
+  // glPushMatrix();
+  // glTranslatef(-1.0f, 1.0f, -5.0f);
+  // glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  // draw_square();
+  // glPopMatrix();
 
-  glLoadIdentity();
 
-  glPushMatrix();
-    glRotatef(angle, 0.0f, 0.0f, 1.0f);
-    glTranslatef(1.0f, 1.0f, -5.0f);
-    draw_square();
-  glPopMatrix();
+  // 2.2.3 - The squares rotate around the origin
 
-  glPushMatrix();
-    glRotatef(angle, 0.0f, 0.0f, 1.0f);
-    glTranslatef(-1.0f, 1.0f, -5.0f);
-    draw_square();
-  glPopMatrix();
+  // glLoadIdentity();
+  //
+  // glPushMatrix();
+  //   glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  //   glTranslatef(1.0f, 1.0f, -5.0f);
+  //   draw_square();
+  // glPopMatrix();
+  //
+  // glPushMatrix();
+  //   glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  //   glTranslatef(-1.0f, 1.0f, -5.0f);
+  //   draw_square();
+  // glPopMatrix();
+
+
+  // 2.2.4
+
+  GLfloat myIdentityMatrix[16] = 	{
+  		1.0,0.0,0.0,0.0,
+  		0.0,1.0,0.0,0.0,
+  		0.0,0.0,1.0,0.0,
+  		0.0,0.0,0.0,1.0
+  	};
+  glMatrixMode(GL_MODELVIEW); // Applies subsequent matrix operations to the modelview matrix stack.
+  glLoadMatrixf(myIdentityMatrix); // Replace the current matrix with the specified matrix
+  MyMatrix matrix = getGLModelviewMatrix();
+
+  // myIdentityMatrix.glMultMatrixf(draw_square());
+
+
 
   //flush what we've drawn to the buffer
 
