@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		2842A181209C8037001AFC7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2842A180209C8037001AFC7F /* Assets.xcassets */; };
 		2842A18F209C8098001AFC7F /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2842A18E209C8098001AFC7F /* SDL.framework */; };
-		2842A194209C80D6001AFC7F /* ReadMeDevLite.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2842A191209C80D6001AFC7F /* ReadMeDevLite.txt */; };
-		2842A195209C80D6001AFC7F /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2842A193209C80D6001AFC7F /* SDLMain.m */; };
 		2842A19A209C8147001AFC7F /* skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2842A199209C8147001AFC7F /* skeleton.cpp */; };
 		2842A27F209C8151001AFC7F /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2842A19C209C8151001AFC7F /* CMakeLists.txt */; };
 		2842A280209C8151001AFC7F /* func_noise.inl in Resources */ = {isa = PBXBuildFile; fileRef = 2842A19E209C8151001AFC7F /* func_noise.inl */; };
@@ -116,6 +114,8 @@
 		2842A2E5209C8152001AFC7F /* int_10_10_10_2.inl in Resources */ = {isa = PBXBuildFile; fileRef = 2842A27A209C8151001AFC7F /* int_10_10_10_2.inl */; };
 		2842A2E6209C8152001AFC7F /* projection.inl in Resources */ = {isa = PBXBuildFile; fileRef = 2842A27D209C8151001AFC7F /* projection.inl */; };
 		2842A2E7209C8152001AFC7F /* multiple.inl in Resources */ = {isa = PBXBuildFile; fileRef = 2842A27E209C8151001AFC7F /* multiple.inl */; };
+		2842A2EC209C902A001AFC7F /* ReadMeDevLite.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2842A2E9209C902A001AFC7F /* ReadMeDevLite.txt */; };
+		2842A2ED209C902A001AFC7F /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2842A2EB209C902A001AFC7F /* SDLMain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,12 +124,9 @@
 		2842A185209C8037001AFC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2842A188209C8037001AFC7F /* Lab1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lab1.entitlements; sourceTree = "<group>"; };
 		2842A18E209C8098001AFC7F /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
-		2842A191209C80D6001AFC7F /* ReadMeDevLite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMeDevLite.txt; sourceTree = "<group>"; };
-		2842A192209C80D6001AFC7F /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
-		2842A193209C80D6001AFC7F /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		2842A197209C8146001AFC7F /* TestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
 		2842A198209C8147001AFC7F /* SDLauxiliary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLauxiliary.h; sourceTree = "<group>"; };
-		2842A199209C8147001AFC7F /* skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = skeleton.cpp; sourceTree = "<group>"; };
+		2842A199209C8147001AFC7F /* skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = skeleton.cpp; sourceTree = "<group>"; wrapsLines = 0; };
 		2842A19C209C8151001AFC7F /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		2842A19E209C8151001AFC7F /* func_noise.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = func_noise.inl; sourceTree = "<group>"; };
 		2842A19F209C8151001AFC7F /* type_vec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = type_vec.hpp; sourceTree = "<group>"; };
@@ -352,6 +349,9 @@
 		2842A27C209C8151001AFC7F /* reciprocal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = reciprocal.hpp; sourceTree = "<group>"; };
 		2842A27D209C8151001AFC7F /* projection.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = projection.inl; sourceTree = "<group>"; };
 		2842A27E209C8151001AFC7F /* multiple.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multiple.inl; sourceTree = "<group>"; };
+		2842A2E9209C902A001AFC7F /* ReadMeDevLite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMeDevLite.txt; sourceTree = "<group>"; };
+		2842A2EA209C902A001AFC7F /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
+		2842A2EB209C902A001AFC7F /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,16 +394,6 @@
 			path = Lab1;
 			sourceTree = "<group>";
 		};
-		2842A190209C80D6001AFC7F /* devel-lite */ = {
-			isa = PBXGroup;
-			children = (
-				2842A191209C80D6001AFC7F /* ReadMeDevLite.txt */,
-				2842A192209C80D6001AFC7F /* SDLMain.h */,
-				2842A193209C80D6001AFC7F /* SDLMain.m */,
-			);
-			path = "devel-lite";
-			sourceTree = "<group>";
-		};
 		2842A196209C80F7001AFC7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,7 +401,7 @@
 				2842A198209C8147001AFC7F /* SDLauxiliary.h */,
 				2842A199209C8147001AFC7F /* skeleton.cpp */,
 				2842A197209C8146001AFC7F /* TestModel.h */,
-				2842A190209C80D6001AFC7F /* devel-lite */,
+				2842A2E8209C902A001AFC7F /* devel-lite */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -677,6 +667,17 @@
 			path = gtx;
 			sourceTree = "<group>";
 		};
+		2842A2E8209C902A001AFC7F /* devel-lite */ = {
+			isa = PBXGroup;
+			children = (
+				2842A2E9209C902A001AFC7F /* ReadMeDevLite.txt */,
+				2842A2EA209C902A001AFC7F /* SDLMain.h */,
+				2842A2EB209C902A001AFC7F /* SDLMain.m */,
+			);
+			name = "devel-lite";
+			path = "../../../../../../Volumes/SDL/devel-lite";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -745,6 +746,7 @@
 				2842A2A7209C8152001AFC7F /* swizzle.inl in Resources */,
 				2842A2BD209C8152001AFC7F /* spline.inl in Resources */,
 				2842A28E209C8151001AFC7F /* type_mat4x2.inl in Resources */,
+				2842A2EC209C902A001AFC7F /* ReadMeDevLite.txt in Resources */,
 				2842A2E2209C8152001AFC7F /* polar_coordinates.inl in Resources */,
 				2842A2A9209C8152001AFC7F /* random.inl in Resources */,
 				2842A29D209C8151001AFC7F /* intrinsic_exponential.inl in Resources */,
@@ -784,7 +786,6 @@
 				2842A2AB209C8152001AFC7F /* log_base.inl in Resources */,
 				2842A2C1209C8152001AFC7F /* closest_point.inl in Resources */,
 				2842A2C9209C8152001AFC7F /* matrix_interpolation.inl in Resources */,
-				2842A194209C80D6001AFC7F /* ReadMeDevLite.txt in Resources */,
 				2842A2A2209C8152001AFC7F /* quaternion.inl in Resources */,
 				2842A283209C8151001AFC7F /* func_packing.inl in Resources */,
 				2842A29B209C8151001AFC7F /* func_matrix.inl in Resources */,
@@ -851,8 +852,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2842A2ED209C902A001AFC7F /* SDLMain.m in Sources */,
 				2842A19A209C8147001AFC7F /* skeleton.cpp in Sources */,
-				2842A195209C80D6001AFC7F /* SDLMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
