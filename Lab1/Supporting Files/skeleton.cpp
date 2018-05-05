@@ -47,7 +47,7 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
     bool intersection = false;
     
     //Loop over all given triangles
-    for (size_t i = 0; i < triangles.size(); ++i) {
+    for (int i = 0; i < triangles.size(); ++i) {
         Triangle triangle = triangles[i];
         
         vec3 v0 = triangle.v0*R;
@@ -65,15 +65,19 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
         float xy = x.y;
         float xz = x.z;
         
+        //The coordinates in their correct "context"
+        vec3 intersectionPoint = v0 + xy*e1 + xz*e2;
+        
         //Check if the point is on the border or inside the triangle,
         //in that case we have a hit
-        if (0 <= xy && 0 <= xz && xy + xz <= 1 && xx >= 0) {
+        if (0 <= xy && 0 <= xz && xy + xz <= 1 && xx > 0 && triangleIndex != i) {
             if (xx < closestIntersection.distance) {
                 closestIntersection.distance = xx;
-                closestIntersection.position = x;
+                closestIntersection.position = intersectionPoint;
                 closestIntersection.triangleIndex = i;
+                intersection = true;
             }
-            intersection = true;
+            
         }
     }
     return intersection;
@@ -100,10 +104,14 @@ vec3 DirectLight(const Intersection& i){
     }
 
     vec3 D = B * rDotNorm;
+    
+    //Add shadows.
     Intersection inter;
     if (ClosestIntersection(i.position, r, triangles, inter, i.triangleIndex)){
         float newObjectDist = glm::distance(inter.position, i.position);
         if (newObjectDist < dist){
+            //If the distance to the "other intersecting object" is less than to the light source,
+            //set it's coordinate to black (shadow)
             return base_color;
         }
     }
@@ -169,10 +177,13 @@ void Draw()
             vec3 direction(x-SCREEN_WIDTH/2, y-SCREEN_HEIGHT/2, focalLength);
             Intersection inter;
             if (ClosestIntersection(cameraPos, direction, triangles, inter, -1)) {
+                
+                //Choose whichever of the vec3s to see the individual components of the lighting
                 vec3 color = triangles[inter.triangleIndex].color; //The triangle's own color
+                vec3 dirLighting = DirectLight(inter); //The direct lighting
                 vec3 colorWithDirLighting = color * DirectLight(inter); //The triangle's own color with direct lighting
                 
-                PutPixelSDL(screen, x, y, DirectLight(inter));
+                PutPixelSDL(screen, x, y, colorWithDirLighting);
             }
             else {
                 PutPixelSDL(screen, x, y, base_color);
