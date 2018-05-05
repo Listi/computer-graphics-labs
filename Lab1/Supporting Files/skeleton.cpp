@@ -29,6 +29,7 @@ SDL_Surface* screen;
 int t;
 vec3 lightPos(0, -0.5, -0.7);
 vec3 lightColor = 14.f * vec3(1,1,1);
+vec3 indirectLight = 0.5f*vec3( 1, 1, 1 );
 
 // ----------------------------------------------------------------------------
 // FUNCTIONS
@@ -38,9 +39,9 @@ void Draw();
 
 //init
 //vec3 DirectLight(const Intersection& i);
-bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int triangleIndex);
+bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int index);
 
-bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int triangleIndex) {
+bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int index) {
     
     //Tip from the lab:
     closestIntersection.distance = std::numeric_limits<float>::max();
@@ -70,14 +71,13 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
         
         //Check if the point is on the border or inside the triangle,
         //in that case we have a hit
-        if (0 <= xy && 0 <= xz && xy + xz <= 1 && xx > 0 && triangleIndex != i) {
+        if (0 <= xy && 0 <= xz && xy + xz <= 1 && xx > 0 && index != i) {
             if (xx < closestIntersection.distance) {
                 closestIntersection.distance = xx;
                 closestIntersection.position = intersectionPoint;
                 closestIntersection.triangleIndex = i;
                 intersection = true;
             }
-            
         }
     }
     return intersection;
@@ -142,9 +142,29 @@ void Update()
 	t = t2;
 	cout << "Render time: " << dt << " ms." << endl;
     
+    
+    //Update the Rotation matrix depending on the (potential) new angle
+    
+    //right
+    R[0][0] = cos(yaw);
+    R[0][1] = 0;
+    R[0][2] = sin(yaw);
+    
+    //down
+    R[1][0] = 0;
+    R[1][1] = 1;
+    R[1][2] = 0;
+    
+    //forward
+    R[2][0] = -sin(yaw);
+    R[2][1] = 0;
+    R[2][2] = cos(yaw);
+    
     //Works slowly, why?
     float pan = 0.2;
     Uint8* keystate = SDL_GetKeyState(0);
+    
+    
     if (keystate[SDLK_UP]){
         cameraPos.z += pan;
     }
@@ -157,11 +177,30 @@ void Update()
     if (keystate[SDLK_RIGHT]){
         yaw -= pan;
     }
-    
-    //Update the Rotation matrix depending on the (potential) new angle
-    R[0][0] = cos(yaw);  R[0][1] = 0; R[0][2] = sin(yaw);
-    R[1][0] = 0; R[1][1] = 1;  R[1][2] = 0;
-    R[2][0] = -sin(yaw);  R[2][1] = 0;  R[2][2] = cos(yaw);
+    if( keystate[SDLK_w] ) {
+        lightPos.z += pan;
+        
+    }
+    if( keystate[SDLK_s] ) {
+        lightPos.z -= pan;
+        
+    }
+    if( keystate[SDLK_a] ) {
+        lightPos.x -= pan;
+        
+    }
+    if( keystate[SDLK_d] ) {
+        lightPos.x += pan;
+        
+    }
+    if( keystate[SDLK_q] ) {
+        lightPos.y += pan;
+        
+    }
+    if( keystate[SDLK_e] ) {
+        lightPos.y -= pan;
+        
+    }
 }
 
 void Draw()
@@ -182,8 +221,9 @@ void Draw()
                 vec3 color = triangles[inter.triangleIndex].color; //The triangle's own color
                 vec3 dirLighting = DirectLight(inter); //The direct lighting
                 vec3 colorWithDirLighting = color * DirectLight(inter); //The triangle's own color with direct lighting
+                vec3 colorWithAllLighting = color * (DirectLight(inter) + indirectLight); //The triangle's own color with direct and indirect lighting
                 
-                PutPixelSDL(screen, x, y, colorWithDirLighting);
+                PutPixelSDL(screen, x, y, colorWithAllLighting);
             }
             else {
                 PutPixelSDL(screen, x, y, base_color);
