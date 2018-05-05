@@ -27,6 +27,8 @@ vec3 cameraPos(0, 0, - 3);
 vector<Triangle> triangles;
 SDL_Surface* screen;
 int t;
+vec3 lightPos(0, -0.5, -0.7);
+vec3 lightColor = 14.f * vec3(1,1,1);
 
 // ----------------------------------------------------------------------------
 // FUNCTIONS
@@ -34,14 +36,15 @@ int t;
 void Update();
 void Draw();
 
-//Initializing ClosestIntersection
-bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection);
+//init
+//vec3 DirectLight(const Intersection& i);
+bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int triangleIndex);
 
-bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection) {
+bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection, int triangleIndex) {
     
     //Tip from the lab:
     closestIntersection.distance = std::numeric_limits<float>::max();
-    bool foundIntersection = false;
+    bool intersection = false;
     
     //Loop over all given triangles
     for (size_t i = 0; i < triangles.size(); ++i) {
@@ -70,10 +73,41 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
                 closestIntersection.position = x;
                 closestIntersection.triangleIndex = i;
             }
-            foundIntersection = true;
+            intersection = true;
         }
     }
-    return foundIntersection;
+    return intersection;
+}
+
+vec3 DirectLight(const Intersection& i){
+    vec3 normal = triangles[i.triangleIndex].normal;
+    float dist = glm::distance(lightPos, i.position);
+    vec3 base_color(0,0,0);
+
+    vec3 distLight;
+    distLight.x = lightPos.x - i.position.x;
+    distLight.y = lightPos.y - i.position.y;
+    distLight.z = lightPos.z - i.position.z;
+
+    vec3 r = glm::normalize(distLight);
+    float rDotNorm = glm::dot(r, normal);
+
+    //Because too lazy to #import M_PI
+    vec3 B = lightColor/(4*3.14159265359f*dist*dist);
+
+    if (rDotNorm<0){
+        rDotNorm = 0;
+    }
+
+    vec3 D = B * rDotNorm;
+    Intersection inter;
+    if (ClosestIntersection(i.position, r, triangles, inter, i.triangleIndex)){
+        float newObjectDist = glm::distance(inter.position, i.position);
+        if (newObjectDist < dist){
+            return base_color;
+        }
+    }
+    return D;
 }
 
 int main( int argc, char* argv[] )
@@ -100,6 +134,7 @@ void Update()
 	t = t2;
 	cout << "Render time: " << dt << " ms." << endl;
     
+    //Works slowly, why?
     float pan = 0.2;
     Uint8* keystate = SDL_GetKeyState(0);
     if (keystate[SDLK_UP]){
@@ -131,10 +166,13 @@ void Draw()
 	{
 		for( int x=0; x<SCREEN_WIDTH; ++x )
 		{
-            vec3 dir(x - SCREEN_WIDTH / 2, y - SCREEN_HEIGHT / 2, focalLength);
+            vec3 direction(x-SCREEN_WIDTH/2, y-SCREEN_HEIGHT/2, focalLength);
             Intersection inter;
-            if (ClosestIntersection(cameraPos, dir, triangles, inter)) {
-                PutPixelSDL(screen, x, y, triangles[inter.triangleIndex].color);
+            if (ClosestIntersection(cameraPos, direction, triangles, inter, -1)) {
+                vec3 color = triangles[inter.triangleIndex].color; //The triangle's own color
+                vec3 colorWithDirLighting = color * DirectLight(inter); //The triangle's own color with direct lighting
+                
+                PutPixelSDL(screen, x, y, DirectLight(inter));
             }
             else {
                 PutPixelSDL(screen, x, y, base_color);
