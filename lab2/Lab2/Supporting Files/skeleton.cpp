@@ -13,15 +13,16 @@ using glm::vec2;
 
 // ----------------------------------------------------------------------------
 // GLOBAL VARIABLES
-
+float focalLength = 100;
 const int SCREEN_WIDTH = 110;
 const int SCREEN_HEIGHT = 110;
 SDL_Surface* screen;
 int t;
 vector<Triangle> triangles;
 vec3 cameraPos( 0, 0, -3.001 );
-mat3 R = glm::mat3(1.0f);
-float focalLength = 100;
+mat3 R;
+float yaw = 0; // Yaw angle controlling camera rotation around y-axis
+
 
 // ----------------------------------------------------------------------------
 // FUNCTIONS
@@ -108,17 +109,34 @@ void Update()
 
 	Uint8* keystate = SDL_GetKeyState(0);
 
-	if( keystate[SDLK_UP] )
-		;
-
-	if( keystate[SDLK_DOWN] )
-		;
-
-	if( keystate[SDLK_RIGHT] )
-		;
-
-	if( keystate[SDLK_LEFT] )
-		;
+    R[0][0] = cos(yaw);
+    R[0][1] = 0;
+    R[0][2] = sin(yaw);
+    
+    //down
+    R[1][0] = 0;
+    R[1][1] = 1;
+    R[1][2] = 0;
+    
+    //forward
+    R[2][0] = -sin(yaw);
+    R[2][1] = 0;
+    R[2][2] = cos(yaw);
+    
+    float pan = 0.02;
+    
+    if (keystate[SDLK_UP]){
+        cameraPos.z += pan;
+    }
+    if (keystate[SDLK_DOWN]){
+        cameraPos.z -= pan;
+    }
+    if (keystate[SDLK_LEFT]){
+        yaw += pan;
+    }
+    if (keystate[SDLK_RIGHT]){
+        yaw -= pan;
+    }
 
 	if( keystate[SDLK_RSHIFT] )
 		;
@@ -160,6 +178,7 @@ void Draw()
 		vertices[1] = triangles[i].v1;
 		vertices[2] = triangles[i].v2;
         DrawPolygonEdges(vertices);
+        
 //        for (int v=0; v<3; ++v){
 //            ivec2 projPos;
 //            VertexShader(vertices[v], projPos);
