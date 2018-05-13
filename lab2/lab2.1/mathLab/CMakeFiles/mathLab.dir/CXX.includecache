@@ -21,6 +21,8 @@ GL/glu.h
 -
 GL/glut.h
 -
+string
+-
 iostream
 -
 stdio.h

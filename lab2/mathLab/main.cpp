@@ -35,7 +35,9 @@ void idle(void);    //what to do when nothing is happening
 void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
-float angle = -10.0;
+float angle = 0.0;
+float panHor = -1.0;
+float panVer = 1.0;
 
 void draw_square (void)
 {
@@ -55,7 +57,33 @@ void draw_square (void)
     glColor3f(1.0, 1.0, 1.0);
     glVertex3f(1.0, 1.0, 0.0);
   glEnd();
+
+  // std::cout << "Square created " + '\n';
 }
+
+// void rotateCClock(void){
+//   angle += 5.0;
+// }
+
+// void rotateClock(void){
+//   angle -= 5.0;
+// }
+//
+// void translateLeft(void){
+//   panHor -= 0.2;
+// }
+//
+// void translateRight(void){
+//   panHor += 0.2;
+// }
+//
+// void translateUp(void){
+//   panVer += 0.2;
+// }
+//
+// void translateDown(void){
+//   panVer -= 0.2;
+// }
 
 //our main routine
 int main(int argc, char *argv[])
@@ -95,7 +123,8 @@ int main(int argc, char *argv[])
 //window needs to be redrawn
 void draw(void)
 {
-  angle += 5.0;
+  // std::cout << angle + '\n';
+  // angle += 5.0;
   //clear the current window
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //make changes to the modelview matrix
@@ -187,55 +216,22 @@ void draw(void)
   //   draw_square();
   // glPopMatrix();
 
-  // 2.2.2 - The squares rotate around their center
 
-  // glLoadIdentity();
-  //
-  // glPushMatrix();
-  // glTranslatef(1.0f, 1.0f, -5.0f);
-  // glRotatef(angle, 0.0f, 0.0f, 1.0f);
-  // draw_square();
-  // glPopMatrix();
-  //
-  // glPushMatrix();
-  // glTranslatef(-1.0f, 1.0f, -5.0f);
-  // glRotatef(angle, 0.0f, 0.0f, 1.0f);
-  // draw_square();
-  // glPopMatrix();
+  // 2.2.2
 
+  glLoadIdentity();
 
-  // 2.2.3 - The squares rotate around the origin
+  glPushMatrix();
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
+    glTranslatef(1.0f, 1.0f, -5.0f);
+    draw_square();
+  glPopMatrix();
 
-  // glLoadIdentity();
-  //
-  // glPushMatrix();
-  //   glRotatef(angle, 0.0f, 0.0f, 1.0f);
-  //   glTranslatef(1.0f, 1.0f, -5.0f);
-  //   draw_square();
-  // glPopMatrix();
-  //
-  // glPushMatrix();
-  //   glRotatef(angle, 0.0f, 0.0f, 1.0f);
-  //   glTranslatef(-1.0f, 1.0f, -5.0f);
-  //   draw_square();
-  // glPopMatrix();
-
-
-  // 2.2.4
-
-  GLfloat myIdentityMatrix[16] = 	{
-  		1.0,0.0,0.0,0.0,
-  		0.0,1.0,0.0,0.0,
-  		0.0,0.0,1.0,0.0,
-  		0.0,0.0,0.0,1.0
-  	};
-  glMatrixMode(GL_MODELVIEW); // Applies subsequent matrix operations to the modelview matrix stack.
-  glLoadMatrixf(myIdentityMatrix); // Replace the current matrix with the specified matrix
-  MyMatrix matrix = getGLModelviewMatrix();
-
-  // myIdentityMatrix.glMultMatrixf(draw_square());
-
-
+  glPushMatrix();
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
+    glTranslatef(panHor, panVer, -5.0f);
+    draw_square();
+  glPopMatrix();
 
   //flush what we've drawn to the buffer
 
@@ -264,7 +260,47 @@ void key(unsigned char k, int x, int y)
       exit(0);
       break;
 
-    case 114:
+    case 113: //Q - rotate counter-clockwise
+      angle += 5.0;
+      // rotateCClock();
+      draw();
+      break;
+
+    case 101: //E - rotate clockwise
+      angle -= 5.0;
+      // rotateClock();
+      draw();
+      break;
+
+    case 119: //W - translate up
+      panVer += 0.2;
+      // translateUp();
+      draw();
+      break;
+
+    case 97: //A - translate left
+      panHor -= 0.2;
+      // translateLeft();
+      draw();
+      break;
+
+    case 115: //S - translate down
+      panVer -= 0.2;
+      // translateDown();
+      draw();
+      break;
+
+    case 100: //D - translate right
+      panHor += 0.2;
+      // translateRight();
+      draw();
+      break;
+
+    case 120: //X - next piece
+      draw();
+      break;
+
+    case 122: //Z- last piece
       draw();
       break;
 
