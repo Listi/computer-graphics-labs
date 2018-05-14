@@ -163,7 +163,7 @@ void ComputePolygonRows(const vector<ivec2>& vertexPixels, vector<ivec2>& leftPi
 
 void DrawRows(const vector<ivec2>& leftPixels, const vector<ivec2>& rightPixels){
     for (int i = 0; i < leftPixels.size(); ++i){
-//        PutPixelSDL(screen, leftPixels[i], rightPixels[i], currentColor);
+        //        PutPixelSDL(screen, leftPixels[i], rightPixels[i], currentColor);
         DrawLineSDL(screen, leftPixels[i], rightPixels[i], currentColor);
     }
 }
@@ -178,52 +178,52 @@ void DrawPolygon(const vector<vec3>& vertices){
     vector<ivec2> rightPixels;
     ComputePolygonRows(vertexPixels, leftPixels, rightPixels);
     DrawRows(leftPixels, rightPixels);
-    }
+}
 
 int main( int argc, char* argv[] )
 {
     // Test case for ComputePolygonRows()
     
-//    vector<ivec2> vertexPixels(3);
-//    vertexPixels[0] = ivec2(10, 5);
-//    vertexPixels[1] = ivec2(5, 10);
-//    vertexPixels[2] = ivec2(15, 15);
-//    vector<ivec2> leftPixels;
-//    vector<ivec2> rightPixels;
-//    ComputePolygonRows(vertexPixels, leftPixels, rightPixels);
-//    for (size_t row = 0; row < leftPixels.size(); ++row) {
-//        cout << "Start: ("
-//            << leftPixels[row].x << ","
-//            << leftPixels[row].y << "). "
-//            << "End: ("
-//            << rightPixels[row].x << ","
-//            << rightPixels[row].y << "). " << endl;
-//    }
+    //    vector<ivec2> vertexPixels(3);
+    //    vertexPixels[0] = ivec2(10, 5);
+    //    vertexPixels[1] = ivec2(5, 10);
+    //    vertexPixels[2] = ivec2(15, 15);
+    //    vector<ivec2> leftPixels;
+    //    vector<ivec2> rightPixels;
+    //    ComputePolygonRows(vertexPixels, leftPixels, rightPixels);
+    //    for (size_t row = 0; row < leftPixels.size(); ++row) {
+    //        cout << "Start: ("
+    //            << leftPixels[row].x << ","
+    //            << leftPixels[row].y << "). "
+    //            << "End: ("
+    //            << rightPixels[row].x << ","
+    //            << rightPixels[row].y << "). " << endl;
+    //    }
     
-	LoadTestModel( triangles );
-	screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
-	t = SDL_GetTicks();	// Set start value for timer.
-
-	while( NoQuitMessageSDL() )
-	{
-		Update();
-		Draw();
-	}
-
-	SDL_SaveBMP( screen, "screenshot.bmp" );
-	return 0;
+    LoadTestModel( triangles );
+    screen = InitializeSDL( SCREEN_WIDTH, SCREEN_HEIGHT );
+    t = SDL_GetTicks();    // Set start value for timer.
+    
+    while( NoQuitMessageSDL() )
+    {
+        Update();
+        Draw();
+    }
+    
+    SDL_SaveBMP( screen, "screenshot.bmp" );
+    return 0;
 }
 
 void Update()
 {
-	// Compute frame time:
-	int t2 = SDL_GetTicks();
-	float dt = float(t2-t);
-	t = t2;
-	cout << "Render time: " << dt << " ms." << endl;
-
-	Uint8* keystate = SDL_GetKeyState(0);
-
+    // Compute frame time:
+    int t2 = SDL_GetTicks();
+    float dt = float(t2-t);
+    t = t2;
+    cout << "Render time: " << dt << " ms." << endl;
+    
+    Uint8* keystate = SDL_GetKeyState(0);
+    
     R[0][0] = cos(yaw);
     R[0][1] = 0;
     R[0][2] = sin(yaw);
@@ -252,60 +252,60 @@ void Update()
     if (keystate[SDLK_RIGHT]){
         yaw -= pan;
     }
-
-	if( keystate[SDLK_RSHIFT] )
-		;
-
-	if( keystate[SDLK_RCTRL] )
-		;
-
-	if( keystate[SDLK_w] )
-		;
-
-	if( keystate[SDLK_s] )
-		;
-
-	if( keystate[SDLK_d] )
-		;
-
-	if( keystate[SDLK_a] )
-		;
-
-	if( keystate[SDLK_e] )
-		;
-
-	if( keystate[SDLK_q] )
-		;
+    
+    if( keystate[SDLK_RSHIFT] )
+        ;
+    
+    if( keystate[SDLK_RCTRL] )
+        ;
+    
+    if( keystate[SDLK_w] )
+        ;
+    
+    if( keystate[SDLK_s] )
+        ;
+    
+    if( keystate[SDLK_d] )
+        ;
+    
+    if( keystate[SDLK_a] )
+        ;
+    
+    if( keystate[SDLK_e] )
+        ;
+    
+    if( keystate[SDLK_q] )
+        ;
 }
 
 void Draw()
 {
-	SDL_FillRect( screen, 0, 0 );
-
-	if( SDL_MUSTLOCK(screen) )
-		SDL_LockSurface(screen);
-	
-	for( int i=0; i<triangles.size(); ++i )
-	{
+    SDL_FillRect( screen, 0, 0 );
+    
+    if( SDL_MUSTLOCK(screen) )
+        SDL_LockSurface(screen);
+    
+    for( int i=0; i<triangles.size(); ++i )
+    {
         currentColor = triangles[i].color;
-		vector<vec3> vertices(3);
+        vector<vec3> vertices(3);
         
-		vertices[0] = triangles[i].v0;
-		vertices[1] = triangles[i].v1;
-		vertices[2] = triangles[i].v2;
-//        DrawPolygonEdges(vertices);
+        vertices[0] = triangles[i].v0;
+        vertices[1] = triangles[i].v1;
+        vertices[2] = triangles[i].v2;
+        //        DrawPolygonEdges(vertices);
         DrawPolygon(vertices);
         
-//        for (int v=0; v<3; ++v){
-//            ivec2 projPos;
-//            VertexShader(vertices[v], projPos);
-//            vec3 color(1,1,1);
-//            PutPixelSDL(screen, projPos.x, projPos.y, color);
-//        }
-	}
-	
-	if ( SDL_MUSTLOCK(screen) )
-		SDL_UnlockSurface(screen);
-
-	SDL_UpdateRect( screen, 0, 0, 0, 0 );
+        //        for (int v=0; v<3; ++v){
+        //            ivec2 projPos;
+        //            VertexShader(vertices[v], projPos);
+        //            vec3 color(1,1,1);
+        //            PutPixelSDL(screen, projPos.x, projPos.y, color);
+        //        }
+    }
+    
+    if ( SDL_MUSTLOCK(screen) )
+        SDL_UnlockSurface(screen);
+    
+    SDL_UpdateRect( screen, 0, 0, 0, 0 );
 }

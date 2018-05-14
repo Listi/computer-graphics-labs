@@ -38,6 +38,7 @@ void init_drawing(void);                  //drawing intialisation
 float angle = 0.0;
 float panHor = -1.0;
 float panVer = 1.0;
+int piece = 0;
 
 void draw_square (void)
 {
@@ -297,6 +298,10 @@ void key(unsigned char k, int x, int y)
       break;
 
     case 120: //X - next piece
+      piece += 1
+      if (piece == 4){
+        piece = 0;
+      }
       draw();
       break;
 
