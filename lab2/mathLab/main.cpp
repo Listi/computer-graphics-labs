@@ -26,6 +26,7 @@
 
 // #include "vector.h"
 using namespace MyMathLab;
+using namespace std;
 
 #include "stdlib.h"
 
@@ -35,10 +36,40 @@ void idle(void);    //what to do when nothing is happening
 void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
-float angle = 0.0;
+// float angle = 0.0;
 float panHor = -1.0;
 float panVer = 1.0;
 int piece = 0;
+int frames = 0;
+
+
+class Piece {
+  float xPan, yPan, angle;
+public:
+  void setPos (float, float, float);
+  // Piece(int, int, int);
+  float getX(){
+    return xPan;
+  }
+  float getY(){
+    return yPan;
+  }
+  float getAngle(){
+    return angle;
+  }
+};
+
+void Piece::setPos(float new_xPan, float new_yPan, float new_angle){
+  xPan += new_xPan;
+  yPan += new_yPan;
+  angle += new_angle;
+}
+
+Piece piece1;
+Piece piece2;
+
+Piece pieces[] = {piece1, piece2};
+// piece1.setPos(1.0f, 1.0f, 1.0f);
 
 void draw_square (void)
 {
@@ -89,6 +120,8 @@ void draw_square (void)
 //our main routine
 int main(int argc, char *argv[])
 {
+
+  // piece1.setPos(-1.0f, 0.0f, 0.0f);
   //Initialise Glut and create a window
   glutInit(&argc, argv);
   //sets up our display mode
@@ -124,7 +157,10 @@ int main(int argc, char *argv[])
 //window needs to be redrawn
 void draw(void)
 {
-  // std::cout << angle + '\n';
+  frames += 1;
+
+
+  // std::cout << piece1.getX(); + '\n';
   // angle += 5.0;
   //clear the current window
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -217,20 +253,27 @@ void draw(void)
   //   draw_square();
   // glPopMatrix();
 
-
   // 2.2.2
+
+
+  if (frames == 1) {
+    pieces[0].setPos(1.0f, 1.0f, 0.0f);
+    pieces[1].setPos(-1.0f, 1.0f, 0.0f);
+  }
+
+  // std::cout << piece1.getAngle(); + '\n';
 
   glLoadIdentity();
 
   glPushMatrix();
-    glRotatef(angle, 0.0f, 0.0f, 1.0f);
-    glTranslatef(1.0f, 1.0f, -5.0f);
+    glRotatef(pieces[0].getAngle(), 0.0f, 0.0f, 1.0f);
+    glTranslatef(pieces[0].getX(), pieces[0].getY(), -5.0f);
     draw_square();
   glPopMatrix();
 
   glPushMatrix();
-    glRotatef(angle, 0.0f, 0.0f, 1.0f);
-    glTranslatef(panHor, panVer, -5.0f);
+    glRotatef(pieces[1].getAngle(), 0.0f, 0.0f, 1.0f);
+    glTranslatef(pieces[1].getX(), pieces[1].getY(), -5.0f);
     draw_square();
   glPopMatrix();
 
@@ -262,50 +305,60 @@ void key(unsigned char k, int x, int y)
       break;
 
     case 113: //Q - rotate counter-clockwise
-      angle += 5.0;
+      // angle += 5.0;
       // rotateCClock();
+      // piece1.setPos(0.0f, 0.0f, 5.0f);
+      pieces[piece].setPos(0.0f, 0.0f, 5.0f);
+      // std::cout << piece1.getAngle(); + '\n';
+      // std::cout << pieces[piece].getAngle(); + '\n';
       draw();
       break;
 
     case 101: //E - rotate clockwise
-      angle -= 5.0;
+      // angle -= 5.0;
       // rotateClock();
+      pieces[piece].setPos(0.0f, 0.0f, -5.0f);
       draw();
       break;
 
     case 119: //W - translate up
-      panVer += 0.2;
+      // panVer += 0.2;
       // translateUp();
+      pieces[piece].setPos(0.0f, 0.2f, 0.0f);
       draw();
       break;
 
     case 97: //A - translate left
-      panHor -= 0.2;
+      // panHor -= 0.2;
       // translateLeft();
+      pieces[piece].setPos(-0.2f, 0.0f, 0.0f);
       draw();
       break;
 
     case 115: //S - translate down
-      panVer -= 0.2;
+      // panVer -= 0.2;
       // translateDown();
+      pieces[piece].setPos(0.0f, -0.2f, 0.0f);
       draw();
       break;
 
     case 100: //D - translate right
-      panHor += 0.2;
+      // panHor += 0.2;
       // translateRight();
+      pieces[piece].setPos(0.2f, 0.0f, 0.0f);
       draw();
       break;
 
     case 120: //X - next piece
-      piece += 1
-      if (piece == 4){
+      piece += 1;
+      if (piece == 2){
         piece = 0;
       }
       draw();
       break;
 
     case 122: //Z- last piece
+      piece -=1;
       draw();
       break;
 
