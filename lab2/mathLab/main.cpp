@@ -36,18 +36,26 @@ void idle(void);    //what to do when nothing is happening
 void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
-// float angle = 0.0;
-float panHor = -1.0;
-float panVer = 1.0;
+
 int piece = 0;
 int frames = 0;
 
 
 class Piece {
-  float xPan, yPan, angle;
+  float xPan, yPan, angle, goalX, goalY, goalAngle;
 public:
+  void setGoal (float, float, float);
   void setPos (float, float, float);
   // Piece(int, int, int);
+  float getGoalX(){
+    return goalX;
+  }
+  float getGoalY(){
+    return goalY;
+  }
+  float getGoalAngle(){
+    return goalAngle;
+  }
   float getX(){
     return xPan;
   }
@@ -65,6 +73,12 @@ void Piece::setPos(float new_xPan, float new_yPan, float new_angle){
   angle += new_angle;
 }
 
+void Piece::setGoal(float new_goalX, float new_goalY, float new_goalAngle){
+  goalX = new_goalX;
+  goalY = new_goalY;
+  goalAngle = new_goalAngle;
+}
+
 Piece piece1;
 Piece piece2;
 
@@ -78,16 +92,16 @@ void draw_square (void)
 
   glBegin(GL_POLYGON);
     glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(-1.0, 1.0, 0.0);
+    glVertex3f(-0.5, 0.5, 0.0);
 
     glColor3f(0.0, 0.0, 0.0);
-    glVertex3f(-1.0, -1.0, 0.0);
+    glVertex3f(-0.5, -0.5, 0.0);
 
     glColor3f(0.0, 0.0, 1.0);
-    glVertex3f(1.0, -1.0, 0.0);
+    glVertex3f(0.5, -0.5, 0.0);
 
     glColor3f(1.0, 1.0, 1.0);
-    glVertex3f(1.0, 1.0, 0.0);
+    glVertex3f(0.5, 0.5, 0.0);
   glEnd();
 
   // std::cout << "Square created " + '\n';
@@ -141,9 +155,9 @@ int main(int argc, char *argv[])
   glutIdleFunc(idle);
   glutDisplayFunc(draw);
 
-  //request a window size of 600 x 600
-  glutInitWindowSize(600,600);
-  glutReshapeWindow(600,600);
+  //request a window size of 800 x 800
+  glutInitWindowSize(800,800);
+  glutReshapeWindow(800,800);
 
   //go into the main loop
   //this loop won't terminate until the user exits the
@@ -180,42 +194,46 @@ void draw(void)
 
 
     //draw the vector at position
-    glDisable(GL_LINE_STIPPLE);
-    glLineWidth(2.0);
-  	glColor3f(1.0,1.0,0.0);
-  	glColor3f(0.0,1.0,0.0);
+    // glDisable(GL_LINE_STIPPLE);
+    // glLineWidth(2.0);
+  	// glColor3f(1.0,1.0,0.0);
+  	// glColor3f(0.0,1.0,0.0);
     // DrawVector(p1,v1);
 
     //draw a red horizontal line, one unit long
     glLineWidth(1.0);
-    glColor3f(3.0,0.0,0.0);
+    glColor3f(0.5,0.5,0.5);
     glPushMatrix();
-  	  glTranslatef(0.0, 0.0, 0.0);
+  	   glTranslatef(-9.55, -9.55, 0.0);
   	  glBegin(GL_LINES);
   		glVertex2f(0.0,0.0);
-  		glVertex2f(1.0,0.0);
+  		glVertex2f(12.0,0.0);
   	  glEnd();
     glPopMatrix();
 
     //draw a green vertical line, one unit high
     glLineWidth(1.0);
-    glColor3f(0.0,0.0,1.0);
+    glColor3f(0.5,0.5,0.5);
     glPushMatrix();
+    glTranslatef(-9.55, -9.55, 0.0);
   	  glBegin(GL_LINES);
   		glVertex2f(0.0,0.0);
-  		glVertex2f(0.0,1.0);
+  		glVertex2f(0.0,12.0);
   	  glEnd();
     glPopMatrix();
 
+
+
+
     //draw a white point at the origin
-    glPointSize(2.0);
-    glColor3f(1.0,1.0,1.0);
-    glPushMatrix();
-  	  glTranslatef(0.0, 0.0, 0.0);
-  	  glBegin(GL_POINTS);
-  		glVertex2f(0.0,0.0);
-  	  glEnd();
-    glPopMatrix();
+    // glPointSize(2.0);
+    // glColor3f(1.0,1.0,1.0);
+    // glPushMatrix();
+  	//   glTranslatef(0.0, 0.0, 0.0);
+  	//   glBegin(GL_POINTS);
+  	// 	glVertex2f(0.0,0.0);
+  	//   glEnd();
+    // glPopMatrix();
 
   glEnd();
 
@@ -258,7 +276,17 @@ void draw(void)
 
   if (frames == 1) {
     pieces[0].setPos(1.0f, 1.0f, 0.0f);
+    pieces[0].setGoal(-1.0f, 1.0f, 0.0f);
+
     pieces[1].setPos(-1.0f, 1.0f, 0.0f);
+  }
+
+// for (int iteration = 0; iteration < pieces.length(); ++iteration){
+//
+// }
+  if (round(pieces[0].getX()*100)/100 == round(pieces[0].getGoalX()*100)/100){
+    std::cout << pieces[0].getX();
+    // pieces[0] = 0;
   }
 
   // std::cout << piece1.getAngle(); + '\n';

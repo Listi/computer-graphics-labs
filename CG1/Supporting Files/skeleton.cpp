@@ -34,13 +34,13 @@ SDL_Surface* screen;
 
 //Task 2.3
 //
-//vec3 red(1,0,0); // topLeft
-//vec3 blue(0,0,1); // topRight
-//vec3 green(0,1,0); // bottomLeft
-//vec3 yellow(1,1,0); // bottomRight
-//vector<vec3> leftSide( SCREEN_HEIGHT );
-//vector<vec3> rightSide( SCREEN_HEIGHT );
-//vector<vec3> horizontal ( SCREEN_WIDTH );
+vec3 red(1,0,0); // topLeft
+vec3 blue(0,0,1); // topRight
+vec3 green(0,1,0); // bottomLeft
+vec3 yellow(1,1,0); // bottomRight
+vector<vec3> leftSide( SCREEN_HEIGHT );
+vector<vec3> rightSide( SCREEN_HEIGHT );
+vector<vec3> horizontal ( SCREEN_WIDTH );
 
 
 //Task 3
@@ -204,7 +204,7 @@ void Update()
     
     for( int s=0; s<stars.size(); ++s ) {
         
-    stars[s].z = stars[s].z - 0.0002*dt;
+    stars[s].z = stars[s].z - 0.00002*dt;
         
     if( stars[s].z <= 0 )
         stars[s].z += 1;
