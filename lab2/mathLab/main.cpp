@@ -39,14 +39,15 @@ void init_drawing(void);                  //drawing intialisation
 
 int piece = 0;
 int frames = 0;
+int noOfPieces = 4;
 
 
 class Piece {
-  float xPan, yPan, angle, goalX, goalY, goalAngle;
+  float xPan, yPan, angle, goalX, goalY, goalAngle, inPlace;
 public:
   void setGoal (float, float, float);
   void setPos (float, float, float);
-  // Piece(int, int, int);
+  void toggleInPlace (bool);
   float getGoalX(){
     return goalX;
   }
@@ -65,6 +66,9 @@ public:
   float getAngle(){
     return angle;
   }
+  bool getInPlace(){
+    return inPlace;
+  }
 };
 
 void Piece::setPos(float new_xPan, float new_yPan, float new_angle){
@@ -79,34 +83,92 @@ void Piece::setGoal(float new_goalX, float new_goalY, float new_goalAngle){
   goalAngle = new_goalAngle;
 }
 
+void Piece::toggleInPlace(bool flag){
+  inPlace = flag;
+}
+
 Piece piece1;
 Piece piece2;
+Piece piece3;
+Piece piece4;
 
-Piece pieces[] = {piece1, piece2};
+Piece pieces[] = {piece1, piece2, piece3, piece4};
 // piece1.setPos(1.0f, 1.0f, 1.0f);
 
-void draw_square (void)
+void draw_square (int iteration)
 {
   // a simple function to draw a square with the current markers
   // orientation and position on screen
+  float centerColor = 1.0;
+  bool isInPlace = pieces[iteration].getInPlace();
 
-  glBegin(GL_POLYGON);
-    glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(-0.5, 0.5, 0.0);
+  if (isInPlace){
+    centerColor = 0.0;
+  }
 
-    glColor3f(0.0, 0.0, 0.0);
-    glVertex3f(-0.5, -0.5, 0.0);
+    if (iteration == 0) {
+      glBegin(GL_POLYGON);
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(-0.5, 0.5, 0.0);
 
-    glColor3f(0.0, 0.0, 1.0);
-    glVertex3f(0.5, -0.5, 0.0);
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(-0.5, -0.5, 0.0);
 
-    glColor3f(1.0, 1.0, 1.0);
-    glVertex3f(0.5, 0.5, 0.0);
-  glEnd();
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(0.5, -0.5, 0.0);
 
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+    else if (iteration == 1) {
+      glBegin(GL_POLYGON);
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+    else if (iteration == 2) {
+      glBegin(GL_POLYGON);
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+    else if (iteration == 3) {
+      glBegin(GL_POLYGON);
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
   // std::cout << "Square created " + '\n';
-}
 
+}
 // void rotateCClock(void){
 //   angle += 5.0;
 // }
@@ -276,34 +338,40 @@ void draw(void)
 
   if (frames == 1) {
     pieces[0].setPos(1.0f, 1.0f, 0.0f);
-    pieces[0].setGoal(-1.0f, 1.0f, 0.0f);
+    pieces[0].setGoal(-1.4f, -1.4f, 0.0f);
 
     pieces[1].setPos(-1.0f, 1.0f, 0.0f);
+    pieces[1].setGoal(-1.4f, -0.4f, 0.0f);
+
+    pieces[2].setPos(-0.6f, 1.0f, 0.0f);
+    pieces[2].setGoal(-0.4f, -0.4f, 0.0f);
+
+    pieces[3].setPos(0.6f, 1.0f, 0.0f);
+    pieces[3].setGoal(-0.4f, -1.4f, 0.0f);
   }
 
-// for (int iteration = 0; iteration < pieces.length(); ++iteration){
-//
-// }
-  if (round(pieces[0].getX()*100)/100 == round(pieces[0].getGoalX()*100)/100){
-    std::cout << pieces[0].getX();
-    // pieces[0] = 0;
+for (int iteration = 0; iteration < noOfPieces; ++iteration){
+  if (round(pieces[iteration].getX()*100)/100 == round(pieces[iteration].getGoalX()*100)/100 && round(pieces[iteration].getY()*100)/100 == round(pieces[iteration].getGoalY()*100)/100){
+    pieces[iteration].toggleInPlace(true);
+    // std::cout << pieces[iteration].getInPlace();
   }
-
-  // std::cout << piece1.getAngle(); + '\n';
+  else {
+    pieces[iteration].toggleInPlace(false);
+    // std::cout << pieces[iteration].getInPlace();
+  }
+}
 
   glLoadIdentity();
 
+  for (int iteration = 0; iteration < noOfPieces; ++iteration){
   glPushMatrix();
-    glRotatef(pieces[0].getAngle(), 0.0f, 0.0f, 1.0f);
-    glTranslatef(pieces[0].getX(), pieces[0].getY(), -5.0f);
-    draw_square();
+    glRotatef(pieces[iteration].getAngle(), 0.0f, 0.0f, 1.0f);
+    glTranslatef(pieces[iteration].getX(), pieces[iteration].getY(), -5.0f);
+    draw_square(iteration);
   glPopMatrix();
+}
 
-  glPushMatrix();
-    glRotatef(pieces[1].getAngle(), 0.0f, 0.0f, 1.0f);
-    glTranslatef(pieces[1].getX(), pieces[1].getY(), -5.0f);
-    draw_square();
-  glPopMatrix();
+
 
   //flush what we've drawn to the buffer
 
@@ -379,7 +447,7 @@ void key(unsigned char k, int x, int y)
 
     case 120: //X - next piece
       piece += 1;
-      if (piece == 2){
+      if (piece == noOfPieces){
         piece = 0;
       }
       draw();
