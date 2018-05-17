@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
   //and double buffering enabled
   glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
   //create a window and pass through the windows title
-  glutCreateWindow("Basic Glut Application");
+  glutCreateWindow("Interpoluzzle");
 
   //run our own drawing initialisation routine
   init_drawing();
@@ -237,17 +237,17 @@ void draw(void)
   // Initialize the pieces on the first frame;
   // set their start and goal position
     if (frames == 1) {
-      pieces[0].setPos(1.0f, 1.0f, 0.0f);
-      pieces[0].setGoal(-1.4f, -1.4f, 0.0f);
+      pieces[0].setPos(1.2f, 1.2f, 4.0f);
+      pieces[0].setGoal(-0.8f, -1.2f, 10.0f);
 
-      pieces[1].setPos(-1.0f, 1.0f, 0.0f);
-      pieces[1].setGoal(-1.4f, -0.4f, 0.0f);
+      pieces[1].setPos(-1.0f, 0.8f, 8.0f);
+      pieces[1].setGoal(-0.8f, -0.2f, 10.0f);
 
-      pieces[2].setPos(-0.6f, 1.0f, 0.0f);
-      pieces[2].setGoal(-0.4f, -0.4f, 0.0f);
+      pieces[2].setPos(-0.6f, 1.0f, -2.0f);
+      pieces[2].setGoal(0.2f, -0.2f, 10.0f);
 
-      pieces[3].setPos(0.6f, 1.0f, 0.0f);
-      pieces[3].setGoal(-0.4f, -1.4f, 0.0f);
+      pieces[3].setPos(0.6f, 1.0f, -12.0f);
+      pieces[3].setGoal(0.2f, -1.2f, 10.0f);
     }
 
   // Check if each piece is on the right place every frame,
@@ -274,7 +274,8 @@ void draw(void)
     glLineWidth(1.0);
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
-  	   glTranslatef(-9.55, -9.55, 0.0);
+  	  glTranslatef(-4.95, -9.55, 0.0);
+      glRotatef(10.0, 0.0f, 0.0f, 1.0f);
   	  glBegin(GL_LINES);
   		glVertex2f(0.0,0.0);
   		glVertex2f(12.0,0.0);
@@ -284,7 +285,8 @@ void draw(void)
     glLineWidth(1.0);
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
-    glTranslatef(-9.55, -9.55, 0.0);
+      glTranslatef(-4.95, -9.55, 0.0);
+      glRotatef(10.0, 0.0f, 0.0f, 1.0f);
   	  glBegin(GL_LINES);
   		glVertex2f(0.0,0.0);
   		glVertex2f(0.0,12.0);
@@ -292,17 +294,27 @@ void draw(void)
     glPopMatrix();
 
 
-  // // Arrow
-  //   glLineWidth(1.0);
-  //   glColor3f(0.5,0.5,0.5);
-  //   glPushMatrix();
-  //   glTranslatef(-7, 8.7, 0.0);
-  // 	  glBegin(GL_LINES);
-  // 		glVertex2f(0.0,0.0);
-  // 		glVertex2f(1.0,0.0);
-  // 	  glEnd();
-  //   glPopMatrix();
-  //
+  // Instruction axis
+    glLineWidth(1.0);
+    glColor3f(0.5,0.5,0.5);
+    glPushMatrix();
+    glTranslatef(-9.6, 7.9, 0.0);
+  	  glBegin(GL_LINES);
+  		glVertex2f(0.0,0.0);
+  		glVertex2f(2.0,0.0);
+  	  glEnd();
+    glPopMatrix();
+
+    glLineWidth(1.0);
+    glColor3f(0.5,0.5,0.5);
+    glPushMatrix();
+    glTranslatef(-9.6, 7.9, 0.0);
+  	  glBegin(GL_LINES);
+  		glVertex2f(0.0,0.0);
+  		glVertex2f(0.0,2.0);
+  	  glEnd();
+    glPopMatrix();
+
   //   glLineWidth(1.0);
   //   glColor3f(0.5,0.5,0.5);
   //   glPushMatrix();
@@ -325,8 +337,8 @@ void draw(void)
   //     glEnd();
   //   glPopMatrix();
 
-// Instructive square
 
+// Semi-interactive, instructive square
 for (int i = 0; i < 2; ++i){
   for (int k = 0; k < 2; ++k){
     if (k == 1 && i == 0){
@@ -373,8 +385,8 @@ for (int i = 0; i < 2; ++i){
 // position and angle.
   for (int iteration = 0; iteration < noOfPieces; ++iteration){
   glPushMatrix();
+  glRotatef(pieces[iteration].getAngle(), 0.0f, 0.0f, 1.0f);
     glTranslatef(pieces[iteration].getX(), pieces[iteration].getY(), -5.0f);
-    glRotatef(pieces[iteration].getAngle(), 0.0f, 0.0f, 1.0f);
     draw_square(iteration);
   glPopMatrix();
 }
@@ -401,46 +413,31 @@ void key(unsigned char k, int x, int y)
       break;
 
     case 113: //Q - rotate counter-clockwise
-      // angle += 5.0;
-      // rotateCClock();
-      // piece1.setPos(0.0f, 0.0f, 5.0f);
       pieces[piece].setPos(0.0f, 0.0f, 2.0f);
-      // std::cout << piece1.getAngle(); + '\n';
-      // std::cout << pieces[piece].getAngle(); + '\n';
       draw();
       break;
 
     case 101: //E - rotate clockwise
-      // angle -= 5.0;
-      // rotateClock();
       pieces[piece].setPos(0.0f, 0.0f, -2.0f);
       draw();
       break;
 
     case 119: //W - translate up
-      // panVer += 0.2;
-      // translateUp();
       pieces[piece].setPos(0.0f, 0.2f, 0.0f);
       draw();
       break;
 
     case 97: //A - translate left
-      // panHor -= 0.2;
-      // translateLeft();
       pieces[piece].setPos(-0.2f, 0.0f, 0.0f);
       draw();
       break;
 
     case 115: //S - translate down
-      // panVer -= 0.2;
-      // translateDown();
       pieces[piece].setPos(0.0f, -0.2f, 0.0f);
       draw();
       break;
 
     case 100: //D - translate right
-      // panHor += 0.2;
-      // translateRight();
       pieces[piece].setPos(0.2f, 0.0f, 0.0f);
       draw();
       break;
