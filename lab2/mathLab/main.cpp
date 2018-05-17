@@ -234,11 +234,43 @@ void draw(void)
   //initialise the modelview matrix to the identity matrix
   glLoadIdentity();
 
+  // Initialize the pieces on the first frame;
+  // set their start and goal position
+    if (frames == 1) {
+      pieces[0].setPos(1.0f, 1.0f, 0.0f);
+      pieces[0].setGoal(-1.4f, -1.4f, 0.0f);
+
+      pieces[1].setPos(-1.0f, 1.0f, 0.0f);
+      pieces[1].setGoal(-1.4f, -0.4f, 0.0f);
+
+      pieces[2].setPos(-0.6f, 1.0f, 0.0f);
+      pieces[2].setGoal(-0.4f, -0.4f, 0.0f);
+
+      pieces[3].setPos(0.6f, 1.0f, 0.0f);
+      pieces[3].setGoal(-0.4f, -1.4f, 0.0f);
+    }
+
+  // Check if each piece is on the right place every frame,
+  // if not; set their inPlace-attribute to false.
+  for (int iteration = 0; iteration < noOfPieces; ++iteration){
+    // Rounding because of problem with the floating numbers
+    if (round(pieces[iteration].getX()*100)/100 == round(pieces[iteration].getGoalX()*100)/100 && round(pieces[iteration].getY()*100)/100 == round(pieces[iteration].getGoalY()*100)/100 && round(pieces[iteration].getAngle()*100)/100 == round(pieces[iteration].getGoalAngle()*100)/100){
+      pieces[iteration].toggleInPlace(true);
+      // std::cout << pieces[iteration].getInPlace();
+    }
+    else {
+      // If a piece once was in the right place but then was
+      // moved again, it should toggle back to false:
+      pieces[iteration].toggleInPlace(false);
+      // std::cout << pieces[iteration].getInPlace();
+    }
+  }
+
   // Initialize a frame for the puzzle pieces in order to
   // give a hint of where the puzzle should be put
   glTranslatef(0.0, 0.0, -25.0);
 
-    //draw a red horizontal line, one unit long
+  // Axis
     glLineWidth(1.0);
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
@@ -249,7 +281,6 @@ void draw(void)
   	  glEnd();
     glPopMatrix();
 
-    //draw a green vertical line, one unit high
     glLineWidth(1.0);
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
@@ -260,41 +291,81 @@ void draw(void)
   	  glEnd();
     glPopMatrix();
 
+
+  // // Arrow
+  //   glLineWidth(1.0);
+  //   glColor3f(0.5,0.5,0.5);
+  //   glPushMatrix();
+  //   glTranslatef(-7, 8.7, 0.0);
+  // 	  glBegin(GL_LINES);
+  // 		glVertex2f(0.0,0.0);
+  // 		glVertex2f(1.0,0.0);
+  // 	  glEnd();
+  //   glPopMatrix();
+  //
+  //   glLineWidth(1.0);
+  //   glColor3f(0.5,0.5,0.5);
+  //   glPushMatrix();
+  //   glRotatef(45.0, 0.0f, 0.0f, 1.0f);
+  //      glTranslatef(-7, 9, 0.0);
+  //     glBegin(GL_LINES);
+  //     glVertex2f(0.0,0.0);
+  //     glVertex2f(0.5,0.0);
+  //     glEnd();
+  //   glPopMatrix();
+  //
+  //   glLineWidth(1.0);
+  //   glColor3f(0.5,0.5,0.5);
+  //   glPushMatrix();
+  //   glTranslatef(-7, 9, 0.0);
+  //   glRotatef(90.0, 0.0f, 0.0f, 1.0f);
+  //     glBegin(GL_LINES);
+  //     glVertex2f(0.0,0.0);
+  //     glVertex2f(0.0,0.5);
+  //     glEnd();
+  //   glPopMatrix();
+
+// Instructive square
+
+for (int i = 0; i < 2; ++i){
+  for (int k = 0; k < 2; ++k){
+    if (k == 1 && i == 0){
+      glPushMatrix();
+        glTranslatef(k-11, i+10, -5.0f);
+        glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+        draw_square(3);
+      glPopMatrix();
+    }
+    else{
+    glPushMatrix();
+      glTranslatef(k-11, i+10, -5.0f);
+      glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+      draw_square(i+k);
+    glPopMatrix();
+  }
+  }
+  }
+
+// for (int i = 0; i < 2; ++i){
+//   for (int k = 0; k < 2; ++k){
+//     if (k == 1 && i == 0){
+//       glPushMatrix();
+//         glTranslatef(k-9, i+8, -5.0f);
+//         glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+//         draw_square(3);
+//       glPopMatrix();
+//     }
+//     else{
+//     glPushMatrix();
+//       glTranslatef(k-11, i+10, -5.0f);
+//       glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+//       draw_square(i+k);
+//     glPopMatrix();
+//   }
+//   }
+//   }
+
   glEnd();
-
-
-
-// Initialize the pieces on the first frame;
-// set their start and goal position
-  if (frames == 1) {
-    pieces[0].setPos(1.0f, 1.0f, 0.0f);
-    pieces[0].setGoal(-1.4f, -1.4f, 0.0f);
-
-    pieces[1].setPos(-1.0f, 1.0f, 0.0f);
-    pieces[1].setGoal(-1.4f, -0.4f, 0.0f);
-
-    pieces[2].setPos(-0.6f, 1.0f, 0.0f);
-    pieces[2].setGoal(-0.4f, -0.4f, 0.0f);
-
-    pieces[3].setPos(0.6f, 1.0f, 0.0f);
-    pieces[3].setGoal(-0.4f, -1.4f, 0.0f);
-  }
-
-// Check if each piece is on the right place every frame,
-// if not; set their inPlace-attribute to false.
-for (int iteration = 0; iteration < noOfPieces; ++iteration){
-  // Rounding because of problem with the floating numbers
-  if (round(pieces[iteration].getX()*100)/100 == round(pieces[iteration].getGoalX()*100)/100 && round(pieces[iteration].getY()*100)/100 == round(pieces[iteration].getGoalY()*100)/100){
-    pieces[iteration].toggleInPlace(true);
-    // std::cout << pieces[iteration].getInPlace();
-  }
-  else {
-    // If a piece once was in the right place but then was
-    // moved again, it should toggle back to false:
-    pieces[iteration].toggleInPlace(false);
-    // std::cout << pieces[iteration].getInPlace();
-  }
-}
 
   glLoadIdentity();
 
@@ -333,7 +404,7 @@ void key(unsigned char k, int x, int y)
       // angle += 5.0;
       // rotateCClock();
       // piece1.setPos(0.0f, 0.0f, 5.0f);
-      pieces[piece].setPos(0.0f, 0.0f, 5.0f);
+      pieces[piece].setPos(0.0f, 0.0f, 2.0f);
       // std::cout << piece1.getAngle(); + '\n';
       // std::cout << pieces[piece].getAngle(); + '\n';
       draw();
@@ -342,7 +413,7 @@ void key(unsigned char k, int x, int y)
     case 101: //E - rotate clockwise
       // angle -= 5.0;
       // rotateClock();
-      pieces[piece].setPos(0.0f, 0.0f, -5.0f);
+      pieces[piece].setPos(0.0f, 0.0f, -2.0f);
       draw();
       break;
 
