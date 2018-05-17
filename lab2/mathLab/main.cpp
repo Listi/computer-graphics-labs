@@ -37,11 +37,24 @@ void key(unsigned char k, int x, int y);  //handle key presses
 void reshape(int width, int height);      //when the window is resized
 void init_drawing(void);                  //drawing intialisation
 
-int piece = 0;
-int frames = 0;
-int noOfPieces = 4;
+int piece = 0;      // Keeps track of the current selected piece
+int frames = 0;     // Counts the number of frames since starting the app
+int noOfPieces = 4; // The number of pieces we are going to create
 
-
+// Class Piece:
+//    members: * current position and angle in space,
+//                * goal position and angle,
+//                * flag for when the piece is at its
+//                 goal position and when it's not
+//    functions:  * setGoal() sets the goal x, y and angle
+//                  value for when the piece should be
+//                  concidered being in the right place,
+//                * setPos() sets the new position of the
+//                  piece.
+//                * toggleInPlace() toggles the flag for
+//                  when the piece is considered being in
+//                  the right place and not.
+//                * functions to access the members.
 class Piece {
   float xPan, yPan, angle, goalX, goalY, goalAngle, inPlace;
 public:
@@ -71,29 +84,32 @@ public:
   }
 };
 
+// Sets the new position and angle of the object
 void Piece::setPos(float new_xPan, float new_yPan, float new_angle){
   xPan += new_xPan;
   yPan += new_yPan;
   angle += new_angle;
 }
 
+//Sets the goal position and angle of the object
 void Piece::setGoal(float new_goalX, float new_goalY, float new_goalAngle){
   goalX = new_goalX;
   goalY = new_goalY;
   goalAngle = new_goalAngle;
 }
 
+// Toggles the inPlace-member
 void Piece::toggleInPlace(bool flag){
   inPlace = flag;
 }
 
+//Create the pieces and put them in an array:
 Piece piece1;
 Piece piece2;
 Piece piece3;
 Piece piece4;
 
 Piece pieces[] = {piece1, piece2, piece3, piece4};
-// piece1.setPos(1.0f, 1.0f, 1.0f);
 
 void draw_square (int iteration)
 {
@@ -169,35 +185,10 @@ void draw_square (int iteration)
   // std::cout << "Square created " + '\n';
 
 }
-// void rotateCClock(void){
-//   angle += 5.0;
-// }
-
-// void rotateClock(void){
-//   angle -= 5.0;
-// }
-//
-// void translateLeft(void){
-//   panHor -= 0.2;
-// }
-//
-// void translateRight(void){
-//   panHor += 0.2;
-// }
-//
-// void translateUp(void){
-//   panVer += 0.2;
-// }
-//
-// void translateDown(void){
-//   panVer -= 0.2;
-// }
 
 //our main routine
 int main(int argc, char *argv[])
 {
-
-  // piece1.setPos(-1.0f, 0.0f, 0.0f);
   //Initialise Glut and create a window
   glutInit(&argc, argv);
   //sets up our display mode
@@ -233,11 +224,9 @@ int main(int argc, char *argv[])
 //window needs to be redrawn
 void draw(void)
 {
+  // Counter of each time a new frame is rendered through draw()
   frames += 1;
 
-
-  // std::cout << piece1.getX(); + '\n';
-  // angle += 5.0;
   //clear the current window
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //make changes to the modelview matrix
@@ -245,22 +234,9 @@ void draw(void)
   //initialise the modelview matrix to the identity matrix
   glLoadIdentity();
 
-  //***DO ALL YOUR DRAWING HERE****//
-
+  // Initialize a frame for the puzzle pieces in order to
+  // give a hint of where the puzzle should be put
   glTranslatef(0.0, 0.0, -25.0);
-
-    /*glColor3f(1.0,0.0,0.0);
-    glBegin(GL_POINTS);
-  	glVertex3f(0.0,0.0,-5.0);
-    glEnd();*/
-
-
-    //draw the vector at position
-    // glDisable(GL_LINE_STIPPLE);
-    // glLineWidth(2.0);
-  	// glColor3f(1.0,1.0,0.0);
-  	// glColor3f(0.0,1.0,0.0);
-    // DrawVector(p1,v1);
 
     //draw a red horizontal line, one unit long
     glLineWidth(1.0);
@@ -284,58 +260,12 @@ void draw(void)
   	  glEnd();
     glPopMatrix();
 
-
-
-
-    //draw a white point at the origin
-    // glPointSize(2.0);
-    // glColor3f(1.0,1.0,1.0);
-    // glPushMatrix();
-  	//   glTranslatef(0.0, 0.0, 0.0);
-  	//   glBegin(GL_POINTS);
-  	// 	glVertex2f(0.0,0.0);
-  	//   glEnd();
-    // glPopMatrix();
-
   glEnd();
 
-  // 2.1.1
-
-  // glLoadIdentity();
-  //
-  // glTranslatef(-1.5f, 0.0f, -6.0f);
-  // glBegin(GL_TRIANGLES);
-  //   glVertex3f(0.0f, 0.0f, 0.0f);
-  //   glVertex3f(1.0f, 0.0f, 0.0f);
-  //   glVertex3f(0.0f, 1.0f, 0.0f);
-  // glEnd();
-  //
-  // glLoadIdentity();
-  // glRotatef(45, 0.0f, 0.0f, 1.0f);
-  // glTranslatef(0.0f, 0.0f, -6.0f);
-  // glBegin(GL_TRIANGLES);
-  //   glVertex3f(0.0f, 0.0f, 0.0f);
-  //   glVertex3f(1.0f, 0.0f, 0.0f);
-  //   glVertex3f(0.0f, 1.0f, 0.0f);
-  // glEnd();
-
-  // 2.2.1
-
-  // glLoadIdentity();
-  //
-  // glPushMatrix();
-  //   glTranslatef(1.0f, 1.0f, -5.0f);
-  //   draw_square();
-  // glPopMatrix();
-  //
-  // glPushMatrix();
-  //   glTranslatef(-1.0f, 1.0f, -5.0f);
-  //   draw_square();
-  // glPopMatrix();
-
-  // 2.2.2
 
 
+// Initialize the pieces on the first frame;
+// set their start and goal position
   if (frames == 1) {
     pieces[0].setPos(1.0f, 1.0f, 0.0f);
     pieces[0].setGoal(-1.4f, -1.4f, 0.0f);
@@ -350,12 +280,17 @@ void draw(void)
     pieces[3].setGoal(-0.4f, -1.4f, 0.0f);
   }
 
+// Check if each piece is on the right place every frame,
+// if not; set their inPlace-attribute to false.
 for (int iteration = 0; iteration < noOfPieces; ++iteration){
+  // Rounding because of problem with the floating numbers
   if (round(pieces[iteration].getX()*100)/100 == round(pieces[iteration].getGoalX()*100)/100 && round(pieces[iteration].getY()*100)/100 == round(pieces[iteration].getGoalY()*100)/100){
     pieces[iteration].toggleInPlace(true);
     // std::cout << pieces[iteration].getInPlace();
   }
   else {
+    // If a piece once was in the right place but then was
+    // moved again, it should toggle back to false:
     pieces[iteration].toggleInPlace(false);
     // std::cout << pieces[iteration].getInPlace();
   }
@@ -363,18 +298,17 @@ for (int iteration = 0; iteration < noOfPieces; ++iteration){
 
   glLoadIdentity();
 
+// For each Piece object; draw it with it's current
+// position and angle.
   for (int iteration = 0; iteration < noOfPieces; ++iteration){
   glPushMatrix();
-    glRotatef(pieces[iteration].getAngle(), 0.0f, 0.0f, 1.0f);
     glTranslatef(pieces[iteration].getX(), pieces[iteration].getY(), -5.0f);
+    glRotatef(pieces[iteration].getAngle(), 0.0f, 0.0f, 1.0f);
     draw_square(iteration);
   glPopMatrix();
 }
 
-
-
   //flush what we've drawn to the buffer
-
 
   glFlush();
   //swap the back buffer with the front buffer
@@ -383,12 +317,7 @@ for (int iteration = 0; iteration < noOfPieces; ++iteration){
 
 //idle callback function - this is called when there is nothing
 //else to do
-void idle(void)
-{
-  //this is a good place to do animation
-  //since there are no animations in this test, we can leave
-  //idle() empty
-}
+void idle(void){}
 
 //key callback function - called whenever the user presses a
 //key
@@ -396,7 +325,7 @@ void key(unsigned char k, int x, int y)
 {
   switch(k)
   {
-    case 27: //27 is the ASCII code for the ESCAPE key
+    case 27: //esc - quit the application
       exit(0);
       break;
 
@@ -453,7 +382,7 @@ void key(unsigned char k, int x, int y)
       draw();
       break;
 
-    case 122: //Z- last piece
+    case 122: //Z - last piece
       piece -=1;
       draw();
       break;
