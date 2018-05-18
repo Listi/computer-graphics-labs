@@ -39,7 +39,7 @@ void init_drawing(void);                  //drawing intialisation
 
 int piece = 0;      // Keeps track of the current selected piece
 int frames = 0;     // Counts the number of frames since starting the app
-int noOfPieces = 4; // The number of pieces we are going to create
+int noOfPieces = 9; // The number of pieces we are going to create
 
 // Class Piece:
 //    members: * current position and angle in space,
@@ -108,8 +108,13 @@ Piece piece1;
 Piece piece2;
 Piece piece3;
 Piece piece4;
+Piece piece5;
+Piece piece6;
+Piece piece7;
+Piece piece8;
+Piece piece9;
 
-Piece pieces[] = {piece1, piece2, piece3, piece4};
+Piece pieces[] = {piece1, piece2, piece3, piece4, piece5, piece6, piece7, piece8, piece9};
 
 void draw_square (int iteration)
 {
@@ -121,7 +126,10 @@ void draw_square (int iteration)
   if (isInPlace){
     centerColor = 0.0;
   }
-
+  else if (iteration == piece) {
+    centerColor = 0.8;
+  }
+    // 3:1
     if (iteration == 0) {
       glBegin(GL_POLYGON);
       glColor3f(1.0, 0.0, 0.0);
@@ -137,53 +145,142 @@ void draw_square (int iteration)
       glVertex3f(0.5, 0.5, 0.0);
       glEnd();
     }
+
+    // 3:2
     else if (iteration == 1) {
       glBegin(GL_POLYGON);
-      glColor3f(0.0, 0.0, 0.0);
+      glColor3f(centerColor, 1.0, centerColor);
       glVertex3f(-0.5, 0.5, 0.0);
 
-      glColor3f(1.0, 0.0, 0.0);
+      glColor3f(0.0, 0.0, 1.0);
       glVertex3f(-0.5, -0.5, 0.0);
 
-      glColor3f(centerColor, 1.0, centerColor);
+      glColor3f(0.0, 0.0, 1.0);
       glVertex3f(0.5, -0.5, 0.0);
 
-      glColor3f(0.0, 0.0, 1.0);
+      glColor3f(centerColor, 1.0, centerColor);
       glVertex3f(0.5, 0.5, 0.0);
       glEnd();
     }
+
+    // 3:3
     else if (iteration == 2) {
       glBegin(GL_POLYGON);
-      glColor3f(0.0, 0.0, 1.0);
+      glColor3f(centerColor, 1.0, centerColor);
       glVertex3f(-0.5, 0.5, 0.0);
 
-      glColor3f(centerColor, 1.0, centerColor);
+      glColor3f(0.0, 0.0, 1.0);
       glVertex3f(-0.5, -0.5, 0.0);
 
-      glColor3f(1.0, 0.0, 0.0);
+      glColor3f(0.0, 0.0, 0.0);
       glVertex3f(0.5, -0.5, 0.0);
 
-      glColor3f(0.0, 0.0, 0.0);
+      glColor3f(1.0, 0.0, 0.0);
       glVertex3f(0.5, 0.5, 0.0);
       glEnd();
     }
+
+    // 2:1
     else if (iteration == 3) {
+      glBegin(GL_POLYGON);
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+
+    // 2:2
+    else if (iteration == 4) {
       glBegin(GL_POLYGON);
       glColor3f(centerColor, 1.0, centerColor);
       glVertex3f(-0.5, 0.5, 0.0);
 
-      glColor3f(0.0, 0.0, 1.0);
+      glColor3f(centerColor, 1.0, centerColor);
       glVertex3f(-0.5, -0.5, 0.0);
 
-      glColor3f(0.0, 0.0, 0.0);
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+
+    // 2:3
+    else if (iteration == 5) {
+      glBegin(GL_POLYGON);
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
       glVertex3f(0.5, -0.5, 0.0);
 
       glColor3f(1.0, 0.0, 0.0);
       glVertex3f(0.5, 0.5, 0.0);
       glEnd();
     }
-  // std::cout << "Square created " + '\n';
 
+    // 1:1
+    else if (iteration == 6) {
+      glBegin(GL_POLYGON);
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+
+    // 1:2
+    else if (iteration == 7) {
+      glBegin(GL_POLYGON);
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
+
+    // 1:3
+    else if (iteration == 8) {
+      glBegin(GL_POLYGON);
+      glColor3f(0.0, 0.0, 1.0);
+      glVertex3f(-0.5, 0.5, 0.0);
+
+      glColor3f(centerColor, 1.0, centerColor);
+      glVertex3f(-0.5, -0.5, 0.0);
+
+      glColor3f(1.0, 0.0, 0.0);
+      glVertex3f(0.5, -0.5, 0.0);
+
+      glColor3f(0.0, 0.0, 0.0);
+      glVertex3f(0.5, 0.5, 0.0);
+      glEnd();
+    }
 }
 
 //our main routine
@@ -237,17 +334,42 @@ void draw(void)
   // Initialize the pieces on the first frame;
   // set their start and goal position
     if (frames == 1) {
-      pieces[0].setPos(1.2f, 1.2f, 4.0f);
+      // 3:1
+      pieces[0].setPos(1.4f, 1.4f, 4.0f);
       pieces[0].setGoal(-0.8f, -1.2f, 10.0f);
 
-      pieces[1].setPos(-1.0f, 0.8f, 8.0f);
-      pieces[1].setGoal(-0.8f, -0.2f, 10.0f);
+      // 3:2
+      pieces[1].setPos(-1.2f, 1.0f, -12.0f);
+      pieces[1].setGoal(0.2f, -1.2f, 10.0f);
 
-      pieces[2].setPos(-0.6f, 1.0f, -2.0f);
-      pieces[2].setGoal(0.2f, -0.2f, 10.0f);
+      // 3:3
+      pieces[2].setPos(0.4f, 1.6f, -30.0f);
+      pieces[2].setGoal(1.2f, -1.2f, 10.0f);
 
-      pieces[3].setPos(0.6f, 1.0f, -12.0f);
-      pieces[3].setGoal(0.2f, -1.2f, 10.0f);
+      // 2:1
+      pieces[3].setPos(0.2f, 0.6f, 20.0f);
+      pieces[3].setGoal(-0.8f, -0.2f, 10.0f);
+
+      // 2:2
+      pieces[4].setPos(1.2f, 1.0f, -18.0f);
+      pieces[4].setGoal(0.2f, -0.2f, 10.0f);
+
+      // 2:3
+      pieces[5].setPos(0.6f, 1.2f, 60.0f);
+      pieces[5].setGoal(1.2f, -0.2f, 10.0f);
+
+      // 1:1
+      pieces[6].setPos(0.8f, 1.4f, 20.0f);
+      pieces[6].setGoal(-0.8f, 0.8f, 10.0f);
+
+      // 1:2
+      pieces[7].setPos(1.0f, 1.0f, -12.0f);
+      pieces[7].setGoal(0.2f, 0.8f, 10.0f);
+
+      // 1:3
+      pieces[8].setPos(-0.6f, 1.6f, -2.0f);
+      pieces[8].setGoal(1.2f, 0.8f, 10.0f);
+
     }
 
   // Check if each piece is on the right place every frame,
@@ -339,22 +461,36 @@ void draw(void)
 
 
 // Semi-interactive, instructive square
-for (int i = 0; i < 2; ++i){
-  for (int k = 0; k < 2; ++k){
-    if (k == 1 && i == 0){
-      glPushMatrix();
-        glTranslatef(k-11, i+10, -5.0f);
-        glRotatef(0.0, 0.0f, 0.0f, 1.0f);
-        draw_square(3);
-      glPopMatrix();
-    }
-    else{
+int square = -2;
+for (int i = 0; i < 3; ++i){
+  square += 2;
+  for (int k = 0; k < 3; ++k){
+  //   if (k == 1 && i == 0){
+  //     glPushMatrix();
+  //       glTranslatef(k-11, i+10, -5.0f);
+  //       glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+  //       draw_square(3);
+  //     glPopMatrix();
+  //   }
+  //   else{
+  //   glPushMatrix();
+  //     glTranslatef(k-11, i+10, -5.0f);
+  //     glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+  //     draw_square(i+k);
+  //   glPopMatrix();
+  // }
+  // if (i == 1){
+  //     glPushMatrix();
+  //       glTranslatef(k-11, i+10, -5.0f);
+  //       glRotatef(0.0, 0.0f, 0.0f, 1.0f);
+  //       draw_square(i+k);
+  //     glPopMatrix();
+  // }
     glPushMatrix();
       glTranslatef(k-11, i+10, -5.0f);
       glRotatef(0.0, 0.0f, 0.0f, 1.0f);
-      draw_square(i+k);
+      draw_square(i+k+square);
     glPopMatrix();
-  }
   }
   }
 
@@ -452,6 +588,9 @@ void key(unsigned char k, int x, int y)
 
     case 122: //Z - last piece
       piece -=1;
+      if (piece < 0){
+        piece = noOfPieces-1;
+      }
       draw();
       break;
 
