@@ -15,11 +15,7 @@ GLUT/glut.h
 -
 windows.h
 -
-GL/gl.h
--
-GL/glu.h
--
-GL/glut.h
+glm/glm.hpp
 -
 string
 -
