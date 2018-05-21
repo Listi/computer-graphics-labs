@@ -202,7 +202,7 @@ void draw_square(int iteration)
 		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(-0.5, 0.5, 0.0);
 
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(1.0, 0.0, 0.0);
 		glVertex3f(-0.5, -0.5, 0.0);
 
 		glColor3f(0.0, 0.0, 1.0);
@@ -239,10 +239,10 @@ void draw_square(int iteration)
 		glColor3f(0.0, 0.0, 1.0);
 		glVertex3f(-0.5, -0.5, 0.0);
 
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(1.0, 0.0, 0.0);
 		glVertex3f(0.5, -0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(0.5, 0.5, 0.0);
 		glEnd();
 	}
@@ -250,10 +250,10 @@ void draw_square(int iteration)
 	// 2:1
 	else if (iteration == 3) {
 		glBegin(GL_POLYGON);
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(-0.5, 0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(-0.5, -0.5, 0.0);
 
 		glColor3f(centerColor, 1.0, centerColor);
@@ -290,10 +290,10 @@ void draw_square(int iteration)
 		glColor3f(centerColor, 1.0, centerColor);
 		glVertex3f(-0.5, -0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(0.5, -0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(0.5, 0.5, 0.0);
 		glEnd();
 	}
@@ -301,10 +301,10 @@ void draw_square(int iteration)
 	// 1:1
 	else if (iteration == 6) {
 		glBegin(GL_POLYGON);
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(1.0, 0.0, 0.0);
 		glVertex3f(-0.5, 0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(-0.5, -0.5, 0.0);
 
 		glColor3f(centerColor, 1.0, centerColor);
@@ -341,10 +341,10 @@ void draw_square(int iteration)
 		glColor3f(centerColor, 1.0, centerColor);
 		glVertex3f(-0.5, -0.5, 0.0);
 
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex3f(0.5, -0.5, 0.0);
 
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(1.0, 0.0, 0.0);
 		glVertex3f(0.5, 0.5, 0.0);
 		glEnd();
 	}
